@@ -90,6 +90,7 @@
             Controls.Add(label1);
             Name = "INICIO";
             Text = "Form2";
+            Load += INICIO_Load;
             ResumeLayout(false);
             PerformLayout();
         }

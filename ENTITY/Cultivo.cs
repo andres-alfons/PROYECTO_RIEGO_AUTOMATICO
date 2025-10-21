@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ENTITY
 {
-    public class Planta
+    public class Cultivo
     {
-        public Planta() { }
-        public Planta(int idPlanta, string nombre, string descripcion, float nivel_optimo_humedad, float nivel_optimo_temperatura)
+        public Cultivo() { }
+        public Cultivo(int idPlanta, string nombre, string descripcion, float nivel_optimo_humedad, float nivel_optimo_temperatura)
         {
             IdPlanta = idPlanta;
             Nombre = nombre;
@@ -19,7 +19,6 @@ namespace ENTITY
         }
         public int IdPlanta { get; set; }
         public string Nombre { get; set; }
-        public string Ubicacion { get; set; }
         public string Descripcion { get; set; }
         public float nivel_optimo_humedad { get; set; }
         public float nivel_optimo_temperatura { get; set; }

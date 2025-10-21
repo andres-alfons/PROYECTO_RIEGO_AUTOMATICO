@@ -32,5 +32,10 @@ namespace PROYECTO_RIEGO_AUTOMATICO
             this.Hide();
 
         }
+
+        private void INICIO_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

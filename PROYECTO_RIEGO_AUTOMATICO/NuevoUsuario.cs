@@ -1,10 +1,12 @@
-﻿using ENTITY;
+﻿using BLL;
+using ENTITY;
 
 
 namespace PROYECTO_RIEGO_AUTOMATICO
 {
     public partial class NuevoUsuario : Form
     {
+        ServiciosUsuario serviciosUsuario = new ServiciosUsuario();
         public NuevoUsuario()
         {
             InitializeComponent();
@@ -32,12 +34,8 @@ namespace PROYECTO_RIEGO_AUTOMATICO
             nuevoUsuario.NombreUsuario = nombreUsuario;
             nuevoUsuario.Password = contraseña;
             nuevoUsuario.Rol = rol;
-            INICIAR.listaUsuario.Add(nuevoUsuario);
-            if (INICIAR.listaUsuario == null || INICIAR.listaUsuario.Count == 0)
-            {
-                MessageBox.Show("No hay usuarios cargados.");
-
-            }
+            
+            var mensaje = serviciosUsuario.Guardar(nuevoUsuario);
             return true;
 
         }

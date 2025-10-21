@@ -43,10 +43,9 @@
   <ItemGroup>
     <Compile Include="Alertas.cs" />
     <Compile Include="WeatherInfo.cs" />
-    <Compile Include="Hitorial_Consumo.cs" />
     <Compile Include="Hitorial_Riego.cs" />
     <Compile Include="Mantenimientos.cs" />
-    <Compile Include="Planta.cs" />
+    <Compile Include="Cultivo.cs" />
     <Compile Include="Sensor.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
