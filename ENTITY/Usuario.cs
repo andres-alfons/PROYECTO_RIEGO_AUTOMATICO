@@ -8,24 +8,17 @@ namespace ENTITY
 {
     public class Usuario
     {
-        public Usuario() { }
-        public Usuario(string idUsuario, string nombre, string apellido, string email, string nombreUsuario, string password, string rol)
-        {
-            IdUsuario = idUsuario;
-            Nombre = nombre;
-            Apellido = apellido;
-            Email = email;
-            NombreUsuario = nombreUsuario;
-            Password = password;
-            Rol = rol;
-        }
 
-        public string IdUsuario { get; set; }
+        public int IdUsuario { get; set; }
         public string Nombre { get; set; }
-        public string Apellido { get; set; }
         public string Email { get; set; }
-        public string NombreUsuario { get; set; }   
+        public string NombreUsuario { get; set; }
         public string Password { get; set; }
         public string Rol { get; set; }
+
+        public override string ToString()
+        {
+            return $"{IdUsuario};{Nombre};{Email};{NombreUsuario};{Password};{Rol}";
+        }
     }
 }

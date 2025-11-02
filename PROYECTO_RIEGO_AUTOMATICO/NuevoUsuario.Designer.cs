@@ -32,13 +32,11 @@
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
-            label5 = new Label();
             label6 = new Label();
             txtId = new TextBox();
             txtEmail = new TextBox();
             txtContraseña = new TextBox();
             txtNombre = new TextBox();
-            txtApellido = new TextBox();
             cbRol = new ComboBox();
             label7 = new Label();
             btnCrearUsuario = new Button();
@@ -69,7 +67,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(121, 260);
+            label3.Location = new Point(117, 269);
             label3.Name = "label3";
             label3.Size = new Size(67, 15);
             label3.TabIndex = 2;
@@ -78,20 +76,11 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(121, 220);
+            label4.Location = new Point(121, 184);
             label4.Name = "label4";
             label4.Size = new Size(36, 15);
             label4.TabIndex = 3;
             label4.Text = "Email";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(121, 180);
-            label5.Name = "label5";
-            label5.Size = new Size(51, 15);
-            label5.TabIndex = 4;
-            label5.Text = "Apellido";
             // 
             // label6
             // 
@@ -112,16 +101,16 @@
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(202, 212);
+            txtEmail.Location = new Point(202, 176);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(234, 23);
             txtEmail.TabIndex = 7;
             // 
             // txtContraseña
             // 
-            txtContraseña.Location = new Point(202, 252);
+            txtContraseña.Location = new Point(198, 261);
             txtContraseña.Name = "txtContraseña";
-            txtContraseña.Size = new Size(234, 23);
+            txtContraseña.Size = new Size(238, 23);
             txtContraseña.TabIndex = 8;
             // 
             // txtNombre
@@ -130,13 +119,6 @@
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(234, 23);
             txtNombre.TabIndex = 9;
-            // 
-            // txtApellido
-            // 
-            txtApellido.Location = new Point(202, 172);
-            txtApellido.Name = "txtApellido";
-            txtApellido.Size = new Size(234, 23);
-            txtApellido.TabIndex = 10;
             // 
             // cbRol
             // 
@@ -160,7 +142,7 @@
             // 
             btnCrearUsuario.BackColor = SystemColors.ActiveCaption;
             btnCrearUsuario.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnCrearUsuario.Location = new Point(522, 220);
+            btnCrearUsuario.Location = new Point(529, 163);
             btnCrearUsuario.Name = "btnCrearUsuario";
             btnCrearUsuario.Size = new Size(156, 36);
             btnCrearUsuario.TabIndex = 13;
@@ -171,7 +153,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(494, 140);
+            label8.Location = new Point(121, 228);
             label8.Name = "label8";
             label8.Size = new Size(47, 15);
             label8.TabIndex = 14;
@@ -179,16 +161,16 @@
             // 
             // txtUusario
             // 
-            txtUusario.Location = new Point(564, 137);
+            txtUusario.Location = new Point(202, 220);
             txtUusario.Name = "txtUusario";
-            txtUusario.Size = new Size(137, 23);
+            txtUusario.Size = new Size(234, 23);
             txtUusario.TabIndex = 15;
             // 
             // button1
             // 
             button1.BackColor = Color.IndianRed;
             button1.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button1.Location = new Point(552, 280);
+            button1.Location = new Point(559, 223);
             button1.Name = "button1";
             button1.Size = new Size(94, 36);
             button1.TabIndex = 16;
@@ -207,13 +189,11 @@
             Controls.Add(btnCrearUsuario);
             Controls.Add(label7);
             Controls.Add(cbRol);
-            Controls.Add(txtApellido);
             Controls.Add(txtNombre);
             Controls.Add(txtContraseña);
             Controls.Add(txtEmail);
             Controls.Add(txtId);
             Controls.Add(label6);
-            Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -231,13 +211,11 @@
         private Label label2;
         private Label label3;
         private Label label4;
-        private Label label5;
         private Label label6;
         private TextBox txtId;
         private TextBox txtEmail;
         private TextBox txtContraseña;
         private TextBox txtNombre;
-        private TextBox txtApellido;
         private ComboBox cbRol;
         private Label label7;
         private Button btnCrearUsuario;

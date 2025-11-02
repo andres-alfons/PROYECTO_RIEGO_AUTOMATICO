@@ -9,14 +9,6 @@ namespace ENTITY
     public class Cultivo
     {
         public Cultivo() { }
-        public Cultivo(int idPlanta, string nombre, string descripcion, float nivel_optimo_humedad, float nivel_optimo_temperatura)
-        {
-            IdPlanta = idPlanta;
-            Nombre = nombre;
-            Descripcion = descripcion;
-            this.nivel_optimo_humedad = nivel_optimo_humedad;
-            this.nivel_optimo_temperatura = nivel_optimo_temperatura;
-        }
         public int IdPlanta { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
@@ -28,6 +20,10 @@ namespace ENTITY
         {
             // Implementación ficticia para obtener el área de la planta
             return 1000.0f; // Valor de ejemplo
+        }
+        public override string ToString()
+        {
+            return $"{IdPlanta};{Nombre};{Descripcion};{nivel_optimo_humedad};{nivel_optimo_temperatura};{nivel_optimo_luz}";
         }
 
     }

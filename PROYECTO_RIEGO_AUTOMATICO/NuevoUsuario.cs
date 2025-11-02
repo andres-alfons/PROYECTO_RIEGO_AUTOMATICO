@@ -1,57 +1,65 @@
 ﻿using BLL;
 using ENTITY;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 
 namespace PROYECTO_RIEGO_AUTOMATICO
 {
     public partial class NuevoUsuario : Form
     {
-        ServiciosUsuario serviciosUsuario = new ServiciosUsuario();
+        ServiciosUsuario serviciosUsuario;
         public NuevoUsuario()
         {
             InitializeComponent();
+            serviciosUsuario = new ServiciosUsuario();
+
         }
         public bool Obtenerdatos()
         {
-            string id_usuario = txtId.Text;
-            string nombre = txtNombre.Text.Trim();
-            string apellido = txtApellido.Text.Trim();
-            string email = txtEmail.Text.Trim();
-            string nombreUsuario = txtUusario.Text.Trim();
-            string contraseña = txtContraseña.Text.Trim();
-            string rol;
-            rol = cbRol.SelectedIndex.ToString();
-            if (string.IsNullOrEmpty(id_usuario) || string.IsNullOrEmpty(nombre) || string.IsNullOrEmpty(apellido) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(nombreUsuario) || string.IsNullOrEmpty(contraseña))
+            if (validarCampos()==false)
             {
-                MessageBox.Show("Por favor, complete todos los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             Usuario nuevoUsuario = new Usuario();
-            nuevoUsuario.IdUsuario= id_usuario;
-            nuevoUsuario.Nombre = nombre;
-            nuevoUsuario.Apellido = apellido;
-            nuevoUsuario.Email = email;
-            nuevoUsuario.NombreUsuario = nombreUsuario;
-            nuevoUsuario.Password = contraseña;
-            nuevoUsuario.Rol = rol;
-            
+            nuevoUsuario.IdUsuario = int.Parse(txtId.Text);
+            nuevoUsuario.Nombre = txtNombre.Text.Trim();
+            nuevoUsuario.Email = txtEmail.Text.Trim();
+            nuevoUsuario.NombreUsuario = txtUusario.Text.Trim();
+            nuevoUsuario.Password = txtContraseña.Text.Trim();
+            nuevoUsuario.Rol = cbRol.GetItemText(cbRol.SelectedItem);
+
             var mensaje = serviciosUsuario.Guardar(nuevoUsuario);
             return true;
 
         }
         public void LimpiarCampos()
         {
-            
             txtNombre.ResetText();
-            txtApellido.ResetText();
             txtEmail.ResetText();
             txtContraseña.ResetText();
             txtId.ResetText();
             txtUusario.ResetText();
-            cbRol.SelectedIndex=-1;
-             
-
-
+            cbRol.SelectedIndex = -1;
+        }
+        private bool validarCampos()
+        {
+            if (string.IsNullOrEmpty(txtNombre.Text) || string.IsNullOrEmpty(txtEmail.Text) || string.IsNullOrEmpty(txtUusario.Text) || string.IsNullOrEmpty(txtContraseña.Text))
+            {
+                MessageBox.Show("Por favor, complete todos los campos.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (cbRol.SelectedIndex == -1)
+            {
+                MessageBox.Show("Por favor, seleccione un rol.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if (int.Parse(txtId.Text) <= 0)
+            {
+                MessageBox.Show("El ID de usuario debe ser un número positivo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -61,7 +69,7 @@ namespace PROYECTO_RIEGO_AUTOMATICO
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
             if (Obtenerdatos())
             {
                 LimpiarCampos();
@@ -73,8 +81,8 @@ namespace PROYECTO_RIEGO_AUTOMATICO
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            //INICIAR form = new INICIAR();
-            //form.Show();
+            INICIAR form = new INICIAR();
+            form.Show();
             this.Hide();
 
 

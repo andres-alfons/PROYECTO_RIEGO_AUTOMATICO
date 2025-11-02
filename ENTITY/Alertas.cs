@@ -8,7 +8,7 @@ namespace ENTITY
 {
     public class Alertas
     {
-        public Alertas() { }    
+        public Alertas() { }
         public Alertas(int idAlerta, string descripcion, DateTime fechaCreacion, string nivel, bool leida, int idUsuario_FK)
         {
             IdAlerta = idAlerta;

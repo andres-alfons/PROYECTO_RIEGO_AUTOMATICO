@@ -9,23 +9,16 @@ namespace DAL
 {
     public class AlertasRepository : BaseRepository<Alertas>
     {
-        public override string Actualizar(Alertas obj)
+        public AlertasRepository(string nombreArchivo) : base(nombreArchivo)
         {
-            MostrarTodos();
-            return "Datos Actualizados";
-        }
-
-        public override Alertas BuscarPorId(int obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Eliminar(Alertas obj)
-        {
-            throw new NotImplementedException();
         }
 
         public override IList<Alertas> MostrarTodos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Alertas ObtenerPorId(int id)
         {
             throw new NotImplementedException();
         }

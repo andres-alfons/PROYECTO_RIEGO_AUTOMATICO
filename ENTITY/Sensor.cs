@@ -15,14 +15,9 @@ namespace ENTITY
             sensor_id = contador++;
         }
         public int sensor_id { get; private set; } // solo lectura
-        public string sensor_name { get; set; } 
-        public DateTime ultima_medicion { get; set; }
-        public float valor_medicion { get; set; } = 0.0f;
-        public string tipo_sensor { get; set; }
-        public string unidad_de_medida { get; set; }
-
-        
-
+        public float Humedad { get; set; }
+        public DateTime Fecha { get; set; }
+        public float Temperatura { get; set; } = 0.0f;
     }
 
 }

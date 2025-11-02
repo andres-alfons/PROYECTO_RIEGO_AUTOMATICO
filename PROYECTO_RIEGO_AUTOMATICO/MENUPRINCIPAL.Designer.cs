@@ -30,6 +30,7 @@
         {
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            label8 = new Label();
             lbDes = new Label();
             lbTemp = new Label();
             lbHum = new Label();
@@ -57,7 +58,6 @@
             pictureBox1 = new PictureBox();
             comboBox1 = new ComboBox();
             tabPage5 = new TabPage();
-            label8 = new Label();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             tabPage4.SuspendLayout();
@@ -96,10 +96,19 @@
             tabPage1.UseVisualStyleBackColor = true;
             tabPage1.Click += tabPage1_Click;
             // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Location = new Point(334, 209);
+            label8.Name = "label8";
+            label8.Size = new Size(50, 15);
+            label8.TabIndex = 22;
+            label8.Text = "Graficos";
+            // 
             // lbDes
             // 
             lbDes.AutoSize = true;
-            lbDes.Location = new Point(383, 160);
+            lbDes.Location = new Point(258, 147);
             lbDes.Name = "lbDes";
             lbDes.Size = new Size(81, 15);
             lbDes.TabIndex = 21;
@@ -108,7 +117,7 @@
             // lbTemp
             // 
             lbTemp.AutoSize = true;
-            lbTemp.Location = new Point(383, 128);
+            lbTemp.Location = new Point(258, 41);
             lbTemp.Name = "lbTemp";
             lbTemp.Size = new Size(88, 15);
             lbTemp.TabIndex = 20;
@@ -117,7 +126,7 @@
             // lbHum
             // 
             lbHum.AutoSize = true;
-            lbHum.Location = new Point(383, 90);
+            lbHum.Location = new Point(55, 147);
             lbHum.Name = "lbHum";
             lbHum.Size = new Size(65, 15);
             lbHum.TabIndex = 19;
@@ -126,7 +135,7 @@
             // lbVie
             // 
             lbVie.AutoSize = true;
-            lbVie.Location = new Point(383, 59);
+            lbVie.Location = new Point(55, 41);
             lbVie.Name = "lbVie";
             lbVie.Size = new Size(47, 15);
             lbVie.TabIndex = 18;
@@ -359,15 +368,6 @@
             tabPage5.TabIndex = 4;
             tabPage5.Text = "CONFIGURACION";
             tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Location = new Point(147, 90);
-            label8.Name = "label8";
-            label8.Size = new Size(50, 15);
-            label8.TabIndex = 22;
-            label8.Text = "Graficos";
             // 
             // MENUPRINCIPAL
             // 

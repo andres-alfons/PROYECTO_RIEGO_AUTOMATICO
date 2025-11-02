@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="ICrudEscritura.cs" />
+    <Compile Include="ICrudLectura.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicioHistorial.cs" />
+    <Compile Include="ServicioPuerto.cs" />
     <Compile Include="ServiciosAlertas.cs" />
     <Compile Include="ServiciosPlanta.cs" />
     <Compile Include="ServiciosUsuario.cs" />

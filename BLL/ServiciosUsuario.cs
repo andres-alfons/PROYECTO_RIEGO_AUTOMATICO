@@ -1,36 +1,32 @@
 ﻿using DAL;
 using ENTITY;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BLL
 {
-    public class ServiciosUsuario
+    public class ServiciosUsuario : ICrudEscritura<Usuario>, ICrudLectura<Usuario>
     {
         UsuarioRepository usuarioRepository;
         public ServiciosUsuario()
         {
-
+            usuarioRepository = new UsuarioRepository(Utils.ARC_USUARIO);
         }
 
         public bool Actualizar(Usuario entidad)
         {
-            throw new NotImplementedException();
+            return usuarioRepository.Actualizar(entidad);
         }
 
-        public ReadOnlyCollection<Usuario> Consultar()
+        public ReadOnlyCollection<Usuario> MostrarTodos()
         {
             var lista = usuarioRepository.MostrarTodos();
             return new ReadOnlyCollection<Usuario>(lista);
         }
 
-        public void Eliminar(Usuario entidad)
+        public bool Eliminar(Usuario entidad)
         {
-            usuarioRepository.Eliminar(entidad);
+            return usuarioRepository.Eliminar(entidad);
         }
 
         public string Guardar(Usuario entidad)
@@ -41,9 +37,8 @@ namespace BLL
         public Usuario ObtenerPorId(int id)
         {
             //validar
-            return usuarioRepository.BuscarPorId(id);
+            return usuarioRepository.ObtenerPorId(id);
         }
-
-
     }
 }
+

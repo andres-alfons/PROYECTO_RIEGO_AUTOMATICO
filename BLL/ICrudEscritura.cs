@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace BLL
 {
-    public class Class1
+    public interface ICrudEscritura<T>
     {
+        string Guardar(T entidad);
+        bool Actualizar(T entidad);
+        bool Eliminar(T entidad);
     }
 }

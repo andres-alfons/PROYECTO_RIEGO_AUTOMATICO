@@ -8,7 +8,8 @@ namespace ENTITY
 {
     public class Mantenimientos
     {
-        public Mantenimientos() {   
+        public Mantenimientos()
+        {
         }
         public Mantenimientos(int idMantenimiento, string descripcion, DateTime fecha, string tipo, int idUsuario_FK, int idEquipo_FK, string observaciones)
         {

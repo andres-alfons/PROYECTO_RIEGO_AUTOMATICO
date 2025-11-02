@@ -1,16 +1,18 @@
+using BLL;
 using ENTITY;
 using System.Security.Cryptography.X509Certificates;
 namespace PROYECTO_RIEGO_AUTOMATICO
 {
     public partial class INICIAR : Form
     {
-        public static List<Usuario> listaUsuario;
-
+        private int intentos = 3;
+        ServiciosUsuario serviciosusuario;
+        List<Usuario> listaUsuario;
         public INICIAR()
         {
-            listaUsuario = new List<Usuario>();
-            //List<Usuario> listaUsuario = new List<Usuario>();
             InitializeComponent();
+            serviciosusuario = new ServiciosUsuario();
+            listaUsuario = serviciosusuario.MostrarTodos().ToList();
             this.StartPosition = FormStartPosition.CenterScreen;
         }
         public bool ValidarInformacion(string nombreUsu, string contra)
@@ -18,40 +20,51 @@ namespace PROYECTO_RIEGO_AUTOMATICO
             if (listaUsuario == null || listaUsuario.Count == 0)
             {
                 MessageBox.Show("No hay usuarios cargados.");
-                
+                return false;
             }
 
-            List<Usuario> lista = ObtenerTodas();
+            if (intentos <= 0)
+            {
+                MessageBox.Show("Ha excedido el número máximo de intentos fallidos. La aplicación se cerrará.");
+                Application.Exit();
+            }
 
-            foreach (var usuario in lista)
+            foreach (var usuario in listaUsuario)
             {
                 if (usuario.NombreUsuario == nombreUsu)
                 {
                     if (usuario.Password == contra)
                     {
                         MessageBox.Show("ACCESO CONCEBIDO");
+                        MENUPRINCIPAL from = new MENUPRINCIPAL();
+                        from.Show();
                         return true;
                     }
                     else
                     {
-                        MessageBox.Show("La contraseña es incorrecta. Por favor, revisar e intentar de nuevo...");
+                        intentos--;
+                        MessageBox.Show("La contraseña es incorrecta. Te quedan " + intentos + " Intentos.");
                         return false;
                     }
                 }
             }
-            MessageBox.Show("Usuario no encontrado. Verifique el nombre de usuario.");
+
+            intentos--;
+            MessageBox.Show("Usuario no encontrado. Verifique el nombre de usuario. " + intentos + " Intentos.");
             return false;
         }
-        public List<Usuario> ObtenerTodas()
-        {
-            return listaUsuario;
-        }
-        
+        //public List<Usuario> ObtenerTodas()
+        //{
+        //    listaUsuario = serviciosusuario.MostrarTodos().ToList();
+        //    return listaUsuario;
+        //}
+
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
-        }  
+        }
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -71,17 +84,15 @@ namespace PROYECTO_RIEGO_AUTOMATICO
         private void button1_Click(object sender, EventArgs e)
         {
             ValidarInformacion(txtUsuario.Text, txtContraseña.Text);
-            MENUPRINCIPAL from = new MENUPRINCIPAL();
-            from.Show();
         }
 
         private void btnCrearCuenta_Click(object sender, EventArgs e)
         {
             NuevoUsuario form3 = new NuevoUsuario();
             form3.Show();
-            //this.Hide();
+            this.Hide();
 
-            
+
 
         }
     }
