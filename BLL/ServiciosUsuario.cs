@@ -1,5 +1,6 @@
 ﻿using DAL;
 using ENTITY;
+using System;
 using System.Collections.ObjectModel;
 
 
@@ -38,6 +39,18 @@ namespace BLL
         {
             //validar
             return usuarioRepository.ObtenerPorId(id);
+        }
+
+        public bool ExisteUsuario(string usuario)
+        {
+            foreach(var lista in MostrarTodos())
+            {
+                if (lista.NombreUsuario == usuario)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

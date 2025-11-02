@@ -1,14 +1,42 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DAL;
+using ENTITY;
+using System.Collections.ObjectModel;
 
 namespace BLL
 {
-    public class ServiciosPlanta
+    public class ServiciosPlanta: ICrudEscritura<Cultivo>, ICrudLectura<Cultivo>
     {
-        public ServiciosPlanta() { }
+            PlantaRepository plantaRepository;
+            public ServiciosPlanta()
+            {
+                plantaRepository = new PlantaRepository(Utils.ARC_PLANTAS);
+            }
 
+            public bool Actualizar(Cultivo entidad)
+            {
+                return plantaRepository.Actualizar(entidad);
+            }
+
+            public ReadOnlyCollection<Cultivo> MostrarTodos()
+            {
+                var lista = plantaRepository.MostrarTodos();
+                return new ReadOnlyCollection<Cultivo>(lista);
+            }
+
+            public bool Eliminar(Cultivo entidad)
+            {
+                return plantaRepository.Eliminar(entidad);
+            }
+
+            public string Guardar(Cultivo entidad)
+            {
+                return plantaRepository.Guardar(entidad);
+            }
+
+            public Cultivo ObtenerPorId(int id)
+            {
+                //validar
+                return plantaRepository.ObtenerPorId(id);
+            }
+        }
     }
-}

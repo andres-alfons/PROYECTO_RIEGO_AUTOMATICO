@@ -59,12 +59,7 @@ namespace DAL
 
         public override Usuario ObtenerPorId(int obj)
         {
-            var entidad = MostrarTodos().FirstOrDefault<Usuario>(x => x.IdUsuario == obj);
-            if (entidad == null)
-            {
-                throw new KeyNotFoundException("No se encontro el registro con el id especificado");
-            }
-            return entidad;
+            return MostrarTodos().FirstOrDefault<Usuario>(x => x.IdUsuario == obj);
         }
 
         public bool Eliminar(Usuario obj)
@@ -112,19 +107,25 @@ namespace DAL
             try
             {
                 List<Usuario> lista = new List<Usuario>();
-                StreamReader lector = new StreamReader(ruta);
 
-                while (!lector.EndOfStream)
+                using (StreamReader lector = new StreamReader(ruta))
                 {
-                    lista.Add(Mappear(lector.ReadLine()));
+                    while (!lector.EndOfStream)
+                    {
+                        var linea = lector.ReadLine();
+                        if (!string.IsNullOrWhiteSpace(linea))
+                        {
+                            lista.Add(Mappear(linea));
+                        }
+                    }
                 }
-                lector.Close();
+
                 return lista;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                return null;
+                Console.WriteLine("Error al leer usuarios: " + ex.Message);
+                return new List<Usuario>();
             }
         }
         private Usuario Mappear(string linea)

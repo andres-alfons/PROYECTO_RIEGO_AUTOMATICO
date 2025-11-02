@@ -39,24 +39,24 @@
             tabPage2 = new TabPage();
             tabPage3 = new TabPage();
             tabPage4 = new TabPage();
-            button2 = new Button();
-            button1 = new Button();
-            textBox3 = new TextBox();
-            txtNivelTemperatura = new TextBox();
-            txtNivelLuz = new TextBox();
-            txtNivelHumedad = new TextBox();
-            txtDescripcion = new TextBox();
-            txtNombre = new TextBox();
-            label1 = new Label();
             panel2 = new Panel();
+            button1 = new Button();
+            MDescripcion = new Label();
+            Mnombre = new Label();
+            Mluz = new Label();
+            Mtemperatura = new Label();
+            Mhumedad = new Label();
+            MId = new Label();
+            button2 = new Button();
             label7 = new Label();
+            label1 = new Label();
             label6 = new Label();
+            cbPlantas = new ComboBox();
             label5 = new Label();
             label4 = new Label();
             label3 = new Label();
             label2 = new Label();
             pictureBox1 = new PictureBox();
-            comboBox1 = new ComboBox();
             tabPage5 = new TabPage();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -80,6 +80,7 @@
             // 
             // tabPage1
             // 
+            tabPage1.BackColor = Color.WhiteSmoke;
             tabPage1.BackgroundImageLayout = ImageLayout.Center;
             tabPage1.Controls.Add(label8);
             tabPage1.Controls.Add(lbDes);
@@ -93,7 +94,6 @@
             tabPage1.Size = new Size(624, 411);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "INICIO";
-            tabPage1.UseVisualStyleBackColor = true;
             tabPage1.Click += tabPage1_Click;
             // 
             // label8
@@ -170,114 +170,28 @@
             // tabPage4
             // 
             tabPage4.BackColor = Color.Gainsboro;
-            tabPage4.Controls.Add(button2);
-            tabPage4.Controls.Add(button1);
-            tabPage4.Controls.Add(textBox3);
-            tabPage4.Controls.Add(txtNivelTemperatura);
-            tabPage4.Controls.Add(txtNivelLuz);
-            tabPage4.Controls.Add(txtNivelHumedad);
-            tabPage4.Controls.Add(txtDescripcion);
-            tabPage4.Controls.Add(txtNombre);
-            tabPage4.Controls.Add(label1);
             tabPage4.Controls.Add(panel2);
-            tabPage4.Controls.Add(comboBox1);
             tabPage4.Location = new Point(4, 24);
             tabPage4.Name = "tabPage4";
             tabPage4.Size = new Size(624, 411);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "MIS PLANTAS";
             // 
-            // button2
-            // 
-            button2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.ForeColor = SystemColors.ActiveCaptionText;
-            button2.Location = new Point(21, 78);
-            button2.Name = "button2";
-            button2.Size = new Size(100, 35);
-            button2.TabIndex = 21;
-            button2.Text = "BUSCAR";
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            button1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = SystemColors.ActiveCaptionText;
-            button1.Location = new Point(19, 340);
-            button1.Name = "button1";
-            button1.Size = new Size(164, 39);
-            button1.TabIndex = 20;
-            button1.Text = "REGISTRAR PLANTA";
-            button1.UseVisualStyleBackColor = true;
-            // 
-            // textBox3
-            // 
-            textBox3.ForeColor = SystemColors.WindowFrame;
-            textBox3.Location = new Point(19, 307);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(172, 23);
-            textBox3.TabIndex = 19;
-            textBox3.Text = "Ubicacion de Origen (Opcional)";
-            // 
-            // txtNivelTemperatura
-            // 
-            txtNivelTemperatura.ForeColor = SystemColors.WindowFrame;
-            txtNivelTemperatura.Location = new Point(19, 249);
-            txtNivelTemperatura.Name = "txtNivelTemperatura";
-            txtNivelTemperatura.Size = new Size(151, 23);
-            txtNivelTemperatura.TabIndex = 18;
-            txtNivelTemperatura.Text = "Nivel de temperatura Optimo";
-            // 
-            // txtNivelLuz
-            // 
-            txtNivelLuz.ForeColor = SystemColors.WindowFrame;
-            txtNivelLuz.Location = new Point(19, 278);
-            txtNivelLuz.Name = "txtNivelLuz";
-            txtNivelLuz.Size = new Size(151, 23);
-            txtNivelLuz.TabIndex = 17;
-            txtNivelLuz.Text = "Nivel de Luz Optima";
-            // 
-            // txtNivelHumedad
-            // 
-            txtNivelHumedad.ForeColor = SystemColors.WindowFrame;
-            txtNivelHumedad.Location = new Point(19, 220);
-            txtNivelHumedad.Name = "txtNivelHumedad";
-            txtNivelHumedad.Size = new Size(151, 23);
-            txtNivelHumedad.TabIndex = 16;
-            txtNivelHumedad.Text = "Nivel de humedad Optimo";
-            // 
-            // txtDescripcion
-            // 
-            txtDescripcion.ForeColor = SystemColors.WindowFrame;
-            txtDescripcion.Location = new Point(19, 191);
-            txtDescripcion.Name = "txtDescripcion";
-            txtDescripcion.Size = new Size(151, 23);
-            txtDescripcion.TabIndex = 15;
-            txtDescripcion.Text = "Descripcion de la planta";
-            // 
-            // txtNombre
-            // 
-            txtNombre.ForeColor = SystemColors.WindowFrame;
-            txtNombre.Location = new Point(19, 162);
-            txtNombre.Name = "txtNombre";
-            txtNombre.Size = new Size(151, 23);
-            txtNombre.TabIndex = 14;
-            txtNombre.Text = "Nombre de la planta";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            label1.ForeColor = SystemColors.ActiveCaptionText;
-            label1.Location = new Point(19, 18);
-            label1.Name = "label1";
-            label1.Size = new Size(151, 17);
-            label1.TabIndex = 13;
-            label1.Text = "BUSCA TU PLANTA";
-            // 
             // panel2
             // 
+            panel2.BackColor = Color.PaleGreen;
+            panel2.Controls.Add(button1);
+            panel2.Controls.Add(MDescripcion);
+            panel2.Controls.Add(Mnombre);
+            panel2.Controls.Add(Mluz);
+            panel2.Controls.Add(Mtemperatura);
+            panel2.Controls.Add(Mhumedad);
+            panel2.Controls.Add(MId);
+            panel2.Controls.Add(button2);
             panel2.Controls.Add(label7);
+            panel2.Controls.Add(label1);
             panel2.Controls.Add(label6);
+            panel2.Controls.Add(cbPlantas);
             panel2.Controls.Add(label5);
             panel2.Controls.Add(label4);
             panel2.Controls.Add(label3);
@@ -285,80 +199,181 @@
             panel2.Controls.Add(pictureBox1);
             panel2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             panel2.ForeColor = SystemColors.ActiveCaptionText;
-            panel2.Location = new Point(197, 18);
+            panel2.Location = new Point(3, 18);
             panel2.Name = "panel2";
-            panel2.Size = new Size(424, 361);
+            panel2.Size = new Size(618, 384);
             panel2.TabIndex = 12;
+            panel2.Paint += panel2_Paint;
+            // 
+            // button1
+            // 
+            button1.BackColor = Color.PowderBlue;
+            button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.ForeColor = SystemColors.ActiveCaptionText;
+            button1.Location = new Point(226, 109);
+            button1.Name = "button1";
+            button1.Size = new Size(100, 54);
+            button1.TabIndex = 28;
+            button1.Text = "Nueva Planta";
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click_2;
+            // 
+            // MDescripcion
+            // 
+            MDescripcion.AutoSize = true;
+            MDescripcion.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            MDescripcion.Location = new Point(448, 291);
+            MDescripcion.Name = "MDescripcion";
+            MDescripcion.Size = new Size(94, 21);
+            MDescripcion.TabIndex = 27;
+            MDescripcion.Text = "Descripción";
+            // 
+            // Mnombre
+            // 
+            Mnombre.AutoSize = true;
+            Mnombre.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            Mnombre.Location = new Point(61, 207);
+            Mnombre.Name = "Mnombre";
+            Mnombre.Size = new Size(68, 21);
+            Mnombre.TabIndex = 26;
+            Mnombre.Text = "Nombre";
+            Mnombre.Click += label13_Click;
+            // 
+            // Mluz
+            // 
+            Mluz.AutoSize = true;
+            Mluz.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            Mluz.Location = new Point(248, 319);
+            Mluz.Name = "Mluz";
+            Mluz.Size = new Size(35, 21);
+            Mluz.TabIndex = 25;
+            Mluz.Text = "Luz";
+            // 
+            // Mtemperatura
+            // 
+            Mtemperatura.AutoSize = true;
+            Mtemperatura.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            Mtemperatura.Location = new Point(58, 315);
+            Mtemperatura.Name = "Mtemperatura";
+            Mtemperatura.Size = new Size(103, 21);
+            Mtemperatura.TabIndex = 24;
+            Mtemperatura.Text = "Temperatura";
+            // 
+            // Mhumedad
+            // 
+            Mhumedad.AutoSize = true;
+            Mhumedad.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            Mhumedad.Location = new Point(246, 228);
+            Mhumedad.Name = "Mhumedad";
+            Mhumedad.Size = new Size(80, 21);
+            Mhumedad.TabIndex = 23;
+            Mhumedad.Text = "Humedad";
+            // 
+            // MId
+            // 
+            MId.AutoSize = true;
+            MId.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            MId.Location = new Point(58, 123);
+            MId.Name = "MId";
+            MId.Size = new Size(24, 21);
+            MId.TabIndex = 22;
+            MId.Text = "Id";
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.Khaki;
+            button2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button2.ForeColor = SystemColors.ActiveCaptionText;
+            button2.Location = new Point(226, 44);
+            button2.Name = "button2";
+            button2.Size = new Size(100, 35);
+            button2.TabIndex = 21;
+            button2.Text = "BUSCAR";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(43, 324);
+            label7.Location = new Point(44, 282);
             label7.Name = "label7";
             label7.Size = new Size(107, 21);
             label7.TabIndex = 6;
             label7.Text = "Temperatura";
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Arial Rounded MT Bold", 11.25F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            label1.ForeColor = SystemColors.ActiveCaptionText;
+            label1.Location = new Point(10, 15);
+            label1.Name = "label1";
+            label1.Size = new Size(151, 17);
+            label1.TabIndex = 13;
+            label1.Text = "BUSCA TU PLANTA";
+            // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(304, 134);
+            label6.Location = new Point(44, 179);
             label6.Name = "label6";
             label6.Size = new Size(73, 21);
             label6.TabIndex = 5;
             label6.Text = "Nombre";
             // 
+            // cbPlantas
+            // 
+            cbPlantas.FormattingEnabled = true;
+            cbPlantas.Location = new Point(173, 9);
+            cbPlantas.Name = "cbPlantas";
+            cbPlantas.Size = new Size(166, 29);
+            cbPlantas.TabIndex = 11;
+            // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(304, 74);
+            label5.Location = new Point(44, 97);
             label5.Name = "label5";
-            label5.Size = new Size(25, 21);
+            label5.Size = new Size(116, 21);
             label5.TabIndex = 4;
-            label5.Text = "id";
+            label5.Text = "Identificación";
+            label5.Click += label5_Click;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(272, 324);
+            label4.Location = new Point(230, 284);
             label4.Name = "label4";
-            label4.Size = new Size(120, 21);
+            label4.Size = new Size(115, 21);
             label4.TabIndex = 3;
-            label4.Text = "Caracteristicas";
+            label4.Text = "Luz Necesaria";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(272, 267);
+            label3.Location = new Point(448, 260);
             label3.Name = "label3";
-            label3.Size = new Size(132, 21);
+            label3.Size = new Size(100, 21);
             label3.TabIndex = 2;
-            label3.Text = "Lugar de Origen";
+            label3.Text = "Descripción";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(43, 267);
+            label2.Location = new Point(230, 200);
             label2.Name = "label2";
-            label2.Size = new Size(80, 21);
+            label2.Size = new Size(85, 21);
             label2.TabIndex = 1;
-            label2.Text = "Hunedad";
+            label2.Text = "Humedad";
+            label2.Click += label2_Click_1;
             // 
             // pictureBox1
             // 
-            pictureBox1.Location = new Point(61, 30);
+            pictureBox1.Location = new Point(379, 26);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(226, 207);
+            pictureBox1.Size = new Size(230, 217);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(18, 44);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(166, 23);
-            comboBox1.TabIndex = 11;
             // 
             // tabPage5
             // 
@@ -373,6 +388,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.ForestGreen;
             ClientSize = new Size(800, 450);
             Controls.Add(tabControl1);
             Name = "MENUPRINCIPAL";
@@ -382,7 +398,6 @@
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             tabPage4.ResumeLayout(false);
-            tabPage4.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -399,26 +414,26 @@
         private Label lbVie;
         private Panel panel1;
         private TabPage tabPage3;
-        private TabPage tabPage4;
         private TabPage tabPage5;
-        private Button button2;
-        private Button button1;
-        private TextBox textBox3;
-        private TextBox txtNivelTemperatura;
-        private TextBox txtNivelLuz;
-        private TextBox txtNivelHumedad;
-        private TextBox txtDescripcion;
-        private TextBox txtNombre;
-        private Label label1;
+        private Label label8;
+        private TabPage tabPage4;
         private Panel panel2;
+        private Label Mnombre;
+        private Label Mluz;
+        private Label Mtemperatura;
+        private Label Mhumedad;
+        private Label MId;
+        private Button button2;
         private Label label7;
+        private Label label1;
         private Label label6;
+        private ComboBox cbPlantas;
         private Label label5;
         private Label label4;
-        private Label label3;
         private Label label2;
         private PictureBox pictureBox1;
-        private ComboBox comboBox1;
-        private Label label8;
+        private Label MDescripcion;
+        private Label label3;
+        private Button button1;
     }
 }

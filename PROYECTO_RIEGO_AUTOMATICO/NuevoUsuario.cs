@@ -17,7 +17,7 @@ namespace PROYECTO_RIEGO_AUTOMATICO
         }
         public bool Obtenerdatos()
         {
-            if (validarCampos()==false)
+            if (validarCampos() == false)
             {
                 return false;
             }
@@ -28,11 +28,29 @@ namespace PROYECTO_RIEGO_AUTOMATICO
             nuevoUsuario.NombreUsuario = txtUusario.Text.Trim();
             nuevoUsuario.Password = txtContraseña.Text.Trim();
             nuevoUsuario.Rol = cbRol.GetItemText(cbRol.SelectedItem);
-
-            var mensaje = serviciosUsuario.Guardar(nuevoUsuario);
+            if (!ValidarUsuario())
+            {
+                return false;
+            }
+            if (serviciosUsuario.ObtenerPorId(nuevoUsuario.IdUsuario)!=null)
+            {
+                MessageBox.Show("El ID de usuario ya existe. Por favor, elija otro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            serviciosUsuario.Guardar(nuevoUsuario);
             return true;
 
         }
+        private bool ValidarUsuario()
+        {
+            if (!serviciosUsuario.ExisteUsuario(txtUusario.Text.Trim()))
+            {
+                MessageBox.Show("El nombre de usuario ya existe. Por favor, elija otro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
         public void LimpiarCampos()
         {
             txtNombre.ResetText();

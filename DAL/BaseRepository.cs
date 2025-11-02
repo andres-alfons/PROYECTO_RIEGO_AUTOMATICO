@@ -15,10 +15,18 @@ namespace DAL
 
         public string Guardar(T entidad)
         {
-            StreamWriter sw = new StreamWriter(ruta, true);
-            sw.WriteLine(entidad.ToString());
-            sw.Close();
-            return $"se guardo los datos de la entidad {typeof(T).Name}";
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(ruta, true))
+                {
+                    sw.WriteLine(entidad.ToString());
+                }
+                return $"Se guardaron los datos de la entidad {typeof(T).Name}.";
+            }
+            catch (Exception ex)
+            {
+                return $"Error al guardar la entidad {typeof(T).Name}: {ex.Message}";
+            }
         }
 
         public abstract IList<T> MostrarTodos();
