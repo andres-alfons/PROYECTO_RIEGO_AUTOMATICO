@@ -1,19 +1,21 @@
 ﻿using BLL;
 using ENTITY;
-using System;
-using System.Net.Http;
+using System.Data;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace PROYECTO_RIEGO_AUTOMATICO
 {
     public partial class MENUPRINCIPAL : Form
     {
         ServiciosPlanta serviciosPlanta;
+        ServicioHistorial servicioHistorial;
+        private float humedad_actual, temperatura_actual;
+        private bool puedeRegar = true;
 
         public MENUPRINCIPAL()
         {
             serviciosPlanta = new ServiciosPlanta();
+            servicioHistorial = new ServicioHistorial();
             InitializeComponent();
             _ = ObtenerDatosClimaAsync();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -37,11 +39,15 @@ namespace PROYECTO_RIEGO_AUTOMATICO
                     lbHum.Text = $"{weatherInfo.main.humidity} %";
                     lbVie.Text = $"{weatherInfo.wind.speed} M/S";
                     lbDes.Text = $"{weatherInfo.weather[0].description.ToUpper()}";
+
+                    temperatura_actual = (float)weatherInfo.main.temp;
+                    humedad_actual = (float)weatherInfo.main.humidity;
                 }
                 catch (HttpRequestException e)
                 {
                     MessageBox.Show($"Error al obtener datos del clima: {e.Message}");
                 }
+
             }
         }
         public void cargarPlantas()
@@ -87,6 +93,7 @@ namespace PROYECTO_RIEGO_AUTOMATICO
 
         private void MENUPRINCIPAL_Load(object sender, EventArgs e)
         {
+            ActualizarEstadoConexion();
 
         }
 
@@ -180,5 +187,112 @@ namespace PROYECTO_RIEGO_AUTOMATICO
         {
 
         }
+
+        private void label14_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void ActualizarEstadoConexion()
+        {
+            if (Application.OpenForms["MENUPRINCIPAL"] != null)
+            {
+                label14.Text = "ACTIVO";
+                label14.BackColor = ColorTranslator.FromHtml("#21864B"); // Verde
+            }
+            else
+            {
+                label14.Text = "DESCONECTADO";
+                label14.BackColor = ColorTranslator.FromHtml("#8B0000"); // Rojo oscuro
+            }
+        }
+
+        private void label17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            CicloRiegoAsync();
+
+        }
+        private async Task CicloRiegoAsync()
+        {
+            if (puedeRegar)
+            {
+                puedeRegar = false;
+                btnRiegoAuto.Enabled = false;
+
+                ActivarRiego(); // Ejecuta el riego
+
+                await Task.Delay(TimeSpan.FromSeconds(10));
+
+                puedeRegar = true;
+                btnRiegoAuto.Enabled = true;
+                MessageBox.Show("Ya puedes volver a regar.");
+            }
+            else
+            {
+                MessageBox.Show("Debes esperar antes de volver a regar.");
+            }
+        }
+
+
+        private void ActivarRiego()
+        {
+            try
+            {
+                    DialogResult resultado = MessageBox.Show($"¿Seguro que quiere iniciar el riego?",
+                        "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (resultado == DialogResult.Yes)
+                {
+
+                    var lis = servicioHistorial.MostrarTodos();
+                    Historial_Riego historial = new Historial_Riego();
+                    historial.Id = lis.Count() + 1;
+                    historial.Temperatura = temperatura_actual;
+                    historial.Humedad = humedad_actual;
+                    historial.Fecha = DateTime.Now;
+                    servicioHistorial.Guardar(historial);
+                }
+                else
+                {
+                    return;
+                }
+
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Ocurrio un error..." + ex);
+            }
+            
+            
+        }
+
+        private void grilla_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            CargarHistorialEnGrid();
+        }
+        private void CargarHistorialEnGrid()
+        {
+            var lista = servicioHistorial.MostrarTodos(); // Devuelve la lista desde el archivo
+
+            // Crear una tabla temporal
+            DataTable tabla = new DataTable();
+            tabla.Columns.Add("Id", typeof(int));
+            tabla.Columns.Add("Fecha", typeof(DateTime));
+            tabla.Columns.Add("Humedad", typeof(float));
+            tabla.Columns.Add("Temperatura", typeof(float));
+
+            foreach (var item in lista)
+            {
+                tabla.Rows.Add(item.Id, item.Fecha, item.Humedad, item.Temperatura);
+            }
+
+            grilla.DataSource = tabla;
+            grilla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            grilla.ReadOnly = true;
+        }
+
     }
 }

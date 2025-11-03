@@ -44,6 +44,7 @@ namespace BLL
                 {
                     throw new ArgumentNullException("El registro que se intento guardar es nulo");
                 }
+                
                 return historial.Guardar(entidad);
 
             }
