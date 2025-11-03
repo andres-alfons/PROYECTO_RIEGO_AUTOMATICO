@@ -63,9 +63,49 @@ namespace PROYECTO_RIEGO_AUTOMATICO.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap humedad {
+            get {
+                object obj = ResourceManager.GetObject("humedad", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Imagen_iniciosession {
             get {
                 object obj = ResourceManager.GetObject("Imagen-iniciosession", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap norte {
+            get {
+                object obj = ResourceManager.GetObject("norte", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pronostico_del_tiempo {
+            get {
+                object obj = ResourceManager.GetObject("pronostico-del-tiempo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap temperatura_alta {
+            get {
+                object obj = ResourceManager.GetObject("temperatura-alta", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

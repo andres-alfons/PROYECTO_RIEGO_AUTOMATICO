@@ -10,12 +10,10 @@ namespace PROYECTO_RIEGO_AUTOMATICO
     public partial class MENUPRINCIPAL : Form
     {
         ServiciosPlanta serviciosPlanta;
-        List<Cultivo> listaPlantas;
 
         public MENUPRINCIPAL()
         {
             serviciosPlanta = new ServiciosPlanta();
-            List<Cultivo> listaPlantas;
             InitializeComponent();
             _ = ObtenerDatosClimaAsync();
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -35,10 +33,10 @@ namespace PROYECTO_RIEGO_AUTOMATICO
                     response.EnsureSuccessStatusCode();
                     string responseBody = await response.Content.ReadAsStringAsync();
                     var weatherInfo = JsonSerializer.Deserialize<ENTITY.WeatherInfo>(responseBody);
-                    lbTemp.Text = $"TEMPERATURA: {weatherInfo.main.temp} °C";
-                    lbHum.Text = $"HUMEDAD: {weatherInfo.main.humidity} %";
-                    lbVie.Text = $"VELOCIDAD DEL VIENTO: {weatherInfo.wind.speed} M/S";
-                    lbDes.Text = $"DESCRIPCION: {weatherInfo.weather[0].description.ToUpper()}";
+                    lbTemperatura.Text = $"{weatherInfo.main.temp}°C";
+                    lbHum.Text = $"{weatherInfo.main.humidity} %";
+                    lbVie.Text = $"{weatherInfo.wind.speed} M/S";
+                    lbDes.Text = $"{weatherInfo.weather[0].description.ToUpper()}";
                 }
                 catch (HttpRequestException e)
                 {
@@ -46,26 +44,35 @@ namespace PROYECTO_RIEGO_AUTOMATICO
                 }
             }
         }
-        private void cargarPlantas()
+        public void cargarPlantas()
         {
             var lista = serviciosPlanta.MostrarTodos();
-            cbPlantas.Items.Clear();
-            foreach (var cultivo in lista)
-            {
-                cbPlantas.Items.Add(cultivo);
-            }
 
+            cbPlantas.DataSource = null;
+            cbPlantas.Items.Clear();
+
+            cbPlantas.DataSource = lista;
+            cbPlantas.DisplayMember = "NombrePlanta"; // Lo que se muestra en el ComboBox
+            cbPlantas.ValueMember = "IdPlanta";       // Valor interno (opcional)
         }
         private void BuscarPlanta()
         {
             if (cbPlantas.SelectedItem is Cultivo cultivo)
             {
                 MId.Text = cultivo.IdPlanta.ToString();
-                Mnombre.Text = cultivo.Nombre;
+                Mnombre.Text = cultivo.NombrePlanta;
                 MDescripcion.Text = cultivo.Descripcion;
-                Mhumedad.Text = cultivo.nivel_optimo_humedad.ToString("0.00")+"%";
-                Mtemperatura.Text = cultivo.nivel_optimo_temperatura.ToString("0.00")+"C°";
-                Mluz.Text = cultivo.nivel_optimo_luz.ToString("0.00")+"%";
+                Mhumedad.Text = cultivo.nivel_optimo_humedad.ToString("0.00") + "%";
+                Mtemperatura.Text = cultivo.nivel_optimo_temperatura.ToString("0.00") + "C°";
+                Mluz.Text = cultivo.nivel_optimo_luz.ToString("0.00") + "%";
+                if (!string.IsNullOrEmpty(cultivo.RutaImagen) && File.Exists(cultivo.RutaImagen))
+                {
+                    pbPlanta.Image = Image.FromFile(cultivo.RutaImagen);
+                }
+                else
+                {
+                    pbPlanta.Image = null;
+                }
             }
             else
             {
@@ -133,6 +140,45 @@ namespace PROYECTO_RIEGO_AUTOMATICO
         private void button2_Click(object sender, EventArgs e)
         {
             BuscarPlanta();
+        }
+
+        private void pbPlanta_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbDes_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbHum_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PanelTemperatura_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

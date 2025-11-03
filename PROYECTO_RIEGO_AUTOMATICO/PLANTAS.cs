@@ -8,9 +8,12 @@ namespace PROYECTO_RIEGO_AUTOMATICO
     public partial class PLANTAS : Form
     {
         ServiciosPlanta serviciosPlanta;
+        MENUPRINCIPAL menu;
+        private string rutaImagenSeleccionada = string.Empty;
         public PLANTAS()
         {
             InitializeComponent();
+            menu = new MENUPRINCIPAL();
             serviciosPlanta = new ServiciosPlanta();
             this.StartPosition = FormStartPosition.CenterScreen;
         }
@@ -23,18 +26,21 @@ namespace PROYECTO_RIEGO_AUTOMATICO
             Cultivo nuevaPlanta = new Cultivo();
 
             nuevaPlanta.IdPlanta = int.Parse(txtId.Text);
-            nuevaPlanta.Nombre = txtNombre.Text;
+            nuevaPlanta.NombrePlanta = txtNombre.Text;
             nuevaPlanta.Descripcion = txtDescripcion.Text;
             nuevaPlanta.nivel_optimo_humedad = float.Parse(txtNivelHumedad.Text);
             nuevaPlanta.nivel_optimo_temperatura = float.Parse(txtNivelTemperatura.Text);
             nuevaPlanta.nivel_optimo_luz = float.Parse(txtNivelLuz.Text);
+            nuevaPlanta.RutaImagen = rutaImagenSeleccionada;
             if (serviciosPlanta.ObtenerPorId(nuevaPlanta.IdPlanta) != null)
             {
                 MessageBox.Show("Ya hay una planta registrada con este id");
                 return false;
             }
-            serviciosPlanta.Guardar(nuevaPlanta);
+            var mensaje = serviciosPlanta.Guardar(nuevaPlanta);
+            MessageBox.Show(mensaje);
             LimpiarCampos();
+            menu.cargarPlantas();
             return true;
         }
         private void ActualizarPlanta()
@@ -47,24 +53,43 @@ namespace PROYECTO_RIEGO_AUTOMATICO
                 return;
             }
             plantaActualizada.IdPlanta = int.Parse(txtId.Text);
-            plantaActualizada.Nombre = txtNombre.Text.Trim();
+            plantaActualizada.NombrePlanta = txtNombre.Text.Trim();
             plantaActualizada.Descripcion = txtDescripcion.Text.Trim();
             plantaActualizada.nivel_optimo_humedad = float.Parse(txtNivelHumedad.Text.Trim());
             plantaActualizada.nivel_optimo_temperatura = float.Parse(txtNivelTemperatura.Text.Trim());
             plantaActualizada.nivel_optimo_luz = float.Parse(txtNivelLuz.Text.Trim());
+            plantaActualizada.RutaImagen = rutaImagenSeleccionada;
             serviciosPlanta.Actualizar(plantaActualizada);
+            menu.cargarPlantas();
+
         }
         private void EliminarPlanta()
         {
             BuscarPlanta();
-            Cultivo plantaExistente = serviciosPlanta.ObtenerPorId(int.Parse(txtId.Text));
-            DialogResult resultado = MessageBox.Show(
-                $"¿Seguro que quiere eliminar la planta con ID {plantaExistente.IdPlanta}?",
+            if (!int.TryParse(txtId.Text.Trim(), out int id))
+            {
+                MessageBox.Show("Por favor ingrese un ID válido (número entero).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            Cultivo plantaExistente = serviciosPlanta.ObtenerPorId(id);
+            string nombre = plantaExistente.NombrePlanta;
+            DialogResult resultado = MessageBox.Show($"¿Seguro que quiere eliminar la planta con ID {plantaExistente.IdPlanta}?",
                     "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (resultado == DialogResult.Yes)
             {
-                serviciosPlanta.Eliminar(plantaExistente);
+
+                if (serviciosPlanta.Eliminar(plantaExistente))
+                {
+                    MessageBox.Show($"La planta {nombre} fue eliminada correctamente");
+
+                }
+                else
+                {
+                    MessageBox.Show("Hubo un error al guardar los cambios: ");
+                }
+                menu.cargarPlantas();
                 LimpiarCampos();
             }
             else
@@ -87,11 +112,12 @@ namespace PROYECTO_RIEGO_AUTOMATICO
                 return;
             }
             txtId.Text = plantaExistente.IdPlanta.ToString();
-            txtNombre.Text = plantaExistente.Nombre;
+            txtNombre.Text = plantaExistente.NombrePlanta;
             txtDescripcion.Text = plantaExistente.Descripcion;
             txtNivelHumedad.Text = plantaExistente.nivel_optimo_humedad.ToString();
             txtNivelTemperatura.Text = plantaExistente.nivel_optimo_temperatura.ToString();
             txtNivelLuz.Text = plantaExistente.nivel_optimo_luz.ToString();
+
         }
 
         private void LimpiarCampos()
@@ -215,6 +241,21 @@ namespace PROYECTO_RIEGO_AUTOMATICO
         private void label2_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnSubirImagen_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialogo = new OpenFileDialog();
+            dialogo.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png;*.bmp";
+
+            if (dialogo.ShowDialog() == DialogResult.OK)
+            {
+                rutaImagenSeleccionada = dialogo.FileName;
+            }
+            else
+            {
+              MessageBox.Show("No se seleccionó ninguna imagen.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

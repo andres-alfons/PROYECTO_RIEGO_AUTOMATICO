@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL
 {
@@ -45,12 +43,23 @@ namespace DAL
 
             var aux = linea.Split(';');
             planta.IdPlanta = int.Parse(aux[0]);
-            planta.Nombre = aux[1];
+            planta.NombrePlanta = aux[1];
             planta.Descripcion = aux[2];
-            planta.nivel_optimo_humedad = float.Parse(aux[3]);
-            planta.nivel_optimo_temperatura = float.Parse(aux[4]);
-            planta.nivel_optimo_luz = float.Parse(aux[5]);
+            planta.RutaImagen = aux[3];
+            planta.nivel_optimo_humedad = float.Parse(aux[4]);
+            planta.nivel_optimo_temperatura = float.Parse(aux[5]);
+            planta.nivel_optimo_luz = float.Parse(aux[6]);
             return planta;
+        }
+        private void ReescribirArchivo(IList<Cultivo> lista)
+        {
+            using (StreamWriter sw = new StreamWriter(ruta, false))
+            {
+                foreach (var item in lista)
+                {
+                    sw.WriteLine(item.ToString());
+                }
+            }
         }
         public bool Eliminar(Cultivo obj)
         {
@@ -58,7 +67,7 @@ namespace DAL
             bool eliminado = false;
             Cultivo PlantaEliminada = null;
 
-            foreach (var item in lista)
+            foreach (var item in lista.ToList()) // Evita modificar la colección mientras se recorre
             {
                 if (item.IdPlanta == obj.IdPlanta)
                 {
@@ -73,23 +82,19 @@ namespace DAL
             {
                 try
                 {
-                    MostrarTodos();
-                    Console.WriteLine($"El Usuario {PlantaEliminada.Nombre} fue eliminado correctamente");
+                    ReescribirArchivo(lista);
                     return true;
-
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Hubo un error...");
                     return false;
                 }
             }
             else
             {
-                Console.WriteLine("No se encontro el usuario...");
+                Console.WriteLine("No se encontró la planta...");
                 return false;
             }
-
         }
         public bool Actualizar(Cultivo obj)
         {
@@ -102,8 +107,9 @@ namespace DAL
                 if (item.IdPlanta == obj.IdPlanta)
                 {
                     PlantaActualizado = item;
-                    item.Nombre = obj.Nombre;
+                    item.NombrePlanta = obj.NombrePlanta;
                     item.Descripcion = obj.Descripcion;
+                    item.RutaImagen = obj.RutaImagen;
                     item.nivel_optimo_humedad = obj.nivel_optimo_humedad;
                     item.nivel_optimo_temperatura = obj.nivel_optimo_temperatura;
                     item.nivel_optimo_luz = obj.nivel_optimo_luz;
@@ -116,7 +122,7 @@ namespace DAL
                 try
                 {
                     MostrarTodos();
-                    Console.WriteLine($"El Usuario {PlantaActualizado.Nombre} fue actualizado correctamente");
+                    Console.WriteLine($"El Usuario {PlantaActualizado.NombrePlanta} fue actualizado correctamente");
                     return true;
                 }
                 catch (Exception)

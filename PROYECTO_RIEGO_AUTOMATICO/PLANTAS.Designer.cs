@@ -36,17 +36,18 @@ namespace PROYECTO_RIEGO_AUTOMATICO
             txtDescripcion = new TextBox();
             txtNombre = new TextBox();
             panel1 = new Panel();
+            btnSubirImagen = new Button();
+            label2 = new Label();
+            label6 = new Label();
+            label5 = new Label();
+            label4 = new Label();
+            label3 = new Label();
+            label1 = new Label();
+            Identificación = new Label();
             txtId = new TextBox();
             btnActualizar = new Button();
             btnEliminar = new Button();
             button2 = new Button();
-            Identificación = new Label();
-            label1 = new Label();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            label6 = new Label();
-            label2 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -55,7 +56,7 @@ namespace PROYECTO_RIEGO_AUTOMATICO
             button1.BackColor = Color.FromArgb(192, 255, 192);
             button1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button1.ForeColor = SystemColors.ActiveCaptionText;
-            button1.Location = new Point(39, 259);
+            button1.Location = new Point(32, 308);
             button1.Name = "button1";
             button1.Size = new Size(164, 39);
             button1.TabIndex = 27;
@@ -112,6 +113,7 @@ namespace PROYECTO_RIEGO_AUTOMATICO
             // panel1
             // 
             panel1.BackColor = SystemColors.GradientActiveCaption;
+            panel1.Controls.Add(btnSubirImagen);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(label6);
             panel1.Controls.Add(label5);
@@ -130,9 +132,100 @@ namespace PROYECTO_RIEGO_AUTOMATICO
             panel1.Controls.Add(txtNivelLuz);
             panel1.Location = new Point(29, 39);
             panel1.Name = "panel1";
-            panel1.Size = new Size(463, 399);
+            panel1.Size = new Size(463, 415);
             panel1.TabIndex = 28;
             panel1.Paint += panel1_Paint;
+            // 
+            // btnSubirImagen
+            // 
+            btnSubirImagen.BackColor = Color.FromArgb(255, 255, 192);
+            btnSubirImagen.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSubirImagen.ForeColor = SystemColors.ActiveCaptionText;
+            btnSubirImagen.Location = new Point(155, 246);
+            btnSubirImagen.Name = "btnSubirImagen";
+            btnSubirImagen.Size = new Size(141, 44);
+            btnSubirImagen.TabIndex = 39;
+            btnSubirImagen.Text = "SUBIR IMAGEN";
+            btnSubirImagen.UseVisualStyleBackColor = false;
+            btnSubirImagen.Click += btnSubirImagen_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Tahoma", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = SystemColors.ActiveCaptionText;
+            label2.Location = new Point(80, 6);
+            label2.Name = "label2";
+            label2.Size = new Size(307, 23);
+            label2.TabIndex = 38;
+            label2.Text = "AGREGAR UNA NUEVA PLANTA";
+            label2.Click += label2_Click_1;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Arial Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.ForeColor = SystemColors.ActiveCaptionText;
+            label6.Location = new Point(237, 197);
+            label6.Name = "label6";
+            label6.Size = new Size(121, 17);
+            label6.TabIndex = 37;
+            label6.Text = "Humedad Optima";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Font = new Font("Arial Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.ForeColor = SystemColors.ActiveCaptionText;
+            label5.Location = new Point(54, 197);
+            label5.Name = "label5";
+            label5.Size = new Size(82, 17);
+            label5.TabIndex = 36;
+            label5.Text = "Luz Optima";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Arial Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label4.ForeColor = SystemColors.ActiveCaptionText;
+            label4.Location = new Point(54, 125);
+            label4.Name = "label4";
+            label4.Size = new Size(85, 17);
+            label4.TabIndex = 35;
+            label4.Text = "Descripción";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Font = new Font("Arial Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label3.ForeColor = SystemColors.ActiveCaptionText;
+            label3.Location = new Point(237, 125);
+            label3.Name = "label3";
+            label3.Size = new Size(178, 17);
+            label3.TabIndex = 34;
+            label3.Text = "Temperatura Optima ( C° )";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Arial Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = SystemColors.ActiveCaptionText;
+            label1.Location = new Point(237, 48);
+            label1.Name = "label1";
+            label1.Size = new Size(59, 17);
+            label1.TabIndex = 32;
+            label1.Text = "Nombre";
+            // 
+            // Identificación
+            // 
+            Identificación.AutoSize = true;
+            Identificación.Font = new Font("Arial Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            Identificación.ForeColor = SystemColors.ActiveCaptionText;
+            Identificación.Location = new Point(54, 49);
+            Identificación.Name = "Identificación";
+            Identificación.Size = new Size(99, 17);
+            Identificación.TabIndex = 31;
+            Identificación.Text = "Identificación";
             // 
             // txtId
             // 
@@ -149,9 +242,9 @@ namespace PROYECTO_RIEGO_AUTOMATICO
             btnActualizar.BackColor = Color.FromArgb(192, 255, 255);
             btnActualizar.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnActualizar.ForeColor = SystemColors.ActiveCaptionText;
-            btnActualizar.Location = new Point(157, 316);
+            btnActualizar.Location = new Point(121, 353);
             btnActualizar.Name = "btnActualizar";
-            btnActualizar.Size = new Size(164, 71);
+            btnActualizar.Size = new Size(229, 55);
             btnActualizar.TabIndex = 29;
             btnActualizar.Text = "ACTUALIZAR INFORMACION DE LA PLANTA";
             btnActualizar.UseVisualStyleBackColor = false;
@@ -162,7 +255,7 @@ namespace PROYECTO_RIEGO_AUTOMATICO
             btnEliminar.BackColor = Color.FromArgb(255, 192, 192);
             btnEliminar.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnEliminar.ForeColor = SystemColors.ActiveCaptionText;
-            btnEliminar.Location = new Point(263, 259);
+            btnEliminar.Location = new Point(272, 308);
             btnEliminar.Name = "btnEliminar";
             btnEliminar.Size = new Size(164, 39);
             btnEliminar.TabIndex = 28;
@@ -183,89 +276,11 @@ namespace PROYECTO_RIEGO_AUTOMATICO
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
             // 
-            // Identificación
-            // 
-            Identificación.AutoSize = true;
-            Identificación.Font = new Font("Arial Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            Identificación.ForeColor = SystemColors.ActiveCaptionText;
-            Identificación.Location = new Point(54, 49);
-            Identificación.Name = "Identificación";
-            Identificación.Size = new Size(99, 17);
-            Identificación.TabIndex = 31;
-            Identificación.Text = "Identificación";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Arial Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = SystemColors.ActiveCaptionText;
-            label1.Location = new Point(237, 48);
-            label1.Name = "label1";
-            label1.Size = new Size(59, 17);
-            label1.TabIndex = 32;
-            label1.Text = "Nombre";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Arial Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.ForeColor = SystemColors.ActiveCaptionText;
-            label3.Location = new Point(237, 125);
-            label3.Name = "label3";
-            label3.Size = new Size(178, 17);
-            label3.TabIndex = 34;
-            label3.Text = "Temperatura Optima ( C° )";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Arial Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.ForeColor = SystemColors.ActiveCaptionText;
-            label4.Location = new Point(54, 125);
-            label4.Name = "label4";
-            label4.Size = new Size(85, 17);
-            label4.TabIndex = 35;
-            label4.Text = "Descripción";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Arial Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = SystemColors.ActiveCaptionText;
-            label5.Location = new Point(54, 197);
-            label5.Name = "label5";
-            label5.Size = new Size(82, 17);
-            label5.TabIndex = 36;
-            label5.Text = "Luz Optima";
-            // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Arial Black", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.ForeColor = SystemColors.ActiveCaptionText;
-            label6.Location = new Point(237, 197);
-            label6.Name = "label6";
-            label6.Size = new Size(121, 17);
-            label6.TabIndex = 37;
-            label6.Text = "Humedad Optima";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Tahoma", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = SystemColors.ActiveCaptionText;
-            label2.Location = new Point(80, 6);
-            label2.Name = "label2";
-            label2.Size = new Size(307, 23);
-            label2.TabIndex = 38;
-            label2.Text = "AGREGAR UNA NUEVA PLANTA";
-            label2.Click += label2_Click_1;
-            // 
             // PLANTAS
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(520, 450);
+            ClientSize = new Size(520, 466);
             Controls.Add(button2);
             Controls.Add(panel1);
             ForeColor = SystemColors.ButtonShadow;
@@ -302,7 +317,6 @@ namespace PROYECTO_RIEGO_AUTOMATICO
         private TextBox txtNombre;
         private Panel panel1;
         private Button btnActualizar;
-        private Button btnEliminar;
         private Button button2;
         private Label label6;
         private Label label5;
@@ -311,5 +325,7 @@ namespace PROYECTO_RIEGO_AUTOMATICO
         private Label label1;
         private Label Identificación;
         private Label label2;
+        private Button btnSubirImagen;
+        private Button btnEliminar;
     }
 }

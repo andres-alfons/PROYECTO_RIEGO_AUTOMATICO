@@ -35,7 +35,6 @@ namespace BLL
 
             public Cultivo ObtenerPorId(int id)
             {
-                //validar
                 return plantaRepository.ObtenerPorId(id);
             }
         }
