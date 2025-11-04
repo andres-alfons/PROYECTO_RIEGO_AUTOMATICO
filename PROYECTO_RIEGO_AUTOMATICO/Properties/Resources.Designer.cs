@@ -63,6 +63,26 @@ namespace PROYECTO_RIEGO_AUTOMATICO.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap grafico {
+            get {
+                object obj = ResourceManager.GetObject("grafico", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap grafico__1_ {
+            get {
+                object obj = ResourceManager.GetObject("grafico (1)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap humedad {
             get {
                 object obj = ResourceManager.GetObject("humedad", resourceCulture);
@@ -106,6 +126,16 @@ namespace PROYECTO_RIEGO_AUTOMATICO.Properties {
         internal static System.Drawing.Bitmap temperatura_alta {
             get {
                 object obj = ResourceManager.GetObject("temperatura-alta", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap user_1104333 {
+            get {
+                object obj = ResourceManager.GetObject("user_1104333", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

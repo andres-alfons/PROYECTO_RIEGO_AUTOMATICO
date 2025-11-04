@@ -23,10 +23,21 @@ namespace PROYECTO_RIEGO_AUTOMATICO
                 return false;
             }
 
+            foreach(var lis in listaUsuario)
+            {
+                if(lis.Accedio == 1)
+                {
+                    lis.Accedio = 0;
+                    serviciosusuario.Actualizar(lis);
+                }
+                
+            }
+
             if (intentos <= 0)
             {
                 MessageBox.Show("Ha excedido el número máximo de intentos fallidos. La aplicación se cerrará.");
                 Application.Exit();
+                return false;
             }
 
             foreach (var usuario in listaUsuario)
@@ -35,15 +46,18 @@ namespace PROYECTO_RIEGO_AUTOMATICO
                 {
                     if (usuario.Password == contra)
                     {
-                        MessageBox.Show("ACCESO CONCEBIDO");
-                        MENUPRINCIPAL from = new MENUPRINCIPAL();
-                        from.Show();
+                        MessageBox.Show("ACCESO CONCEDIDO");
+                        usuario.Accedio = 1;
+                        serviciosusuario.Actualizar(usuario);
+                        MENUPRINCIPAL form = new MENUPRINCIPAL();
+                        form.Show();
+                        this.Hide();
                         return true;
                     }
                     else
                     {
                         intentos--;
-                        MessageBox.Show("La contraseña es incorrecta. Te quedan " + intentos + " Intentos.");
+                        MessageBox.Show($"La contraseña es incorrecta. Te quedan {intentos} intento(s).");
                         return false;
                     }
                 }
@@ -52,14 +66,8 @@ namespace PROYECTO_RIEGO_AUTOMATICO
             intentos--;
             MessageBox.Show("Usuario no encontrado. Verifique el nombre de usuario. " + intentos + " Intentos.");
             return false;
+           
         }
-        //public List<Usuario> ObtenerTodas()
-        //{
-        //    listaUsuario = serviciosusuario.MostrarTodos().ToList();
-        //    return listaUsuario;
-        //}
-
-
 
         private void Form1_Load(object sender, EventArgs e)
         {

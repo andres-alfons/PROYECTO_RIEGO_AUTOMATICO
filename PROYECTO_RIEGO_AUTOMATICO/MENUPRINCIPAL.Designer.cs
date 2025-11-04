@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MENUPRINCIPAL));
-            tabControl1 = new TabControl();
+            tabControl = new TabControl();
             PanelPrincipal = new TabPage();
             panel3 = new Panel();
             ImagenTemperatura = new PictureBox();
@@ -56,6 +57,7 @@
             pictureBox3 = new PictureBox();
             label18 = new Label();
             panel6 = new Panel();
+            lbUltimoRegado = new Label();
             pictureBox4 = new PictureBox();
             label16 = new Label();
             panel4 = new Panel();
@@ -63,6 +65,12 @@
             label8 = new Label();
             pictureBox1 = new PictureBox();
             tabPage2 = new TabPage();
+            lbFechaActual = new Label();
+            label19 = new Label();
+            button8 = new Button();
+            BuscarHistorial = new Button();
+            dtpFechaBusqueda = new DateTimePicker();
+            label15 = new Label();
             grilla = new DataGridView();
             tabPage3 = new TabPage();
             btnRiegoAuto = new Button();
@@ -86,7 +94,40 @@
             label2 = new Label();
             pbPlanta = new PictureBox();
             tabPage5 = new TabPage();
-            tabControl1.SuspendLayout();
+            tabPage1 = new TabPage();
+            cbRol = new ComboBox();
+            btnGuardarCambios = new Button();
+            btnHacerCambios = new Button();
+            button10 = new Button();
+            label24 = new Label();
+            label25 = new Label();
+            txtNombreUsuario = new TextBox();
+            label23 = new Label();
+            txtEmailUsu = new TextBox();
+            label21 = new Label();
+            txtNombreUsuariodelUsuario = new TextBox();
+            label20 = new Label();
+            txtIdUsuario = new TextBox();
+            pbImagenUsuario = new PictureBox();
+            panel7 = new Panel();
+            nightControlBox1 = new ReaLTaiizor.Controls.NightControlBox();
+            btnHam = new PictureBox();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            panel10 = new Panel();
+            button5 = new Button();
+            panel9 = new Panel();
+            btnHistorial = new Button();
+            panel13 = new Panel();
+            button7 = new Button();
+            panel11 = new Panel();
+            button6 = new Button();
+            panel8 = new Panel();
+            button3 = new Button();
+            panel12 = new Panel();
+            button4 = new Button();
+            MenuTrancicion = new System.Windows.Forms.Timer(components);
+            timer1 = new System.Windows.Forms.Timer(components);
+            tabControl.SuspendLayout();
             PanelPrincipal.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)ImagenTemperatura).BeginInit();
@@ -110,20 +151,33 @@
             tabPage4.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pbPlanta).BeginInit();
+            tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pbImagenUsuario).BeginInit();
+            panel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)btnHam).BeginInit();
+            flowLayoutPanel1.SuspendLayout();
+            panel10.SuspendLayout();
+            panel9.SuspendLayout();
+            panel13.SuspendLayout();
+            panel11.SuspendLayout();
+            panel8.SuspendLayout();
+            panel12.SuspendLayout();
             SuspendLayout();
             // 
-            // tabControl1
+            // tabControl
             // 
-            tabControl1.Controls.Add(PanelPrincipal);
-            tabControl1.Controls.Add(tabPage2);
-            tabControl1.Controls.Add(tabPage3);
-            tabControl1.Controls.Add(tabPage4);
-            tabControl1.Controls.Add(tabPage5);
-            tabControl1.Location = new Point(143, 12);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(632, 439);
-            tabControl1.TabIndex = 14;
+            tabControl.Controls.Add(PanelPrincipal);
+            tabControl.Controls.Add(tabPage2);
+            tabControl.Controls.Add(tabPage3);
+            tabControl.Controls.Add(tabPage4);
+            tabControl.Controls.Add(tabPage5);
+            tabControl.Controls.Add(tabPage1);
+            tabControl.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            tabControl.Location = new Point(228, 48);
+            tabControl.Name = "tabControl";
+            tabControl.SelectedIndex = 0;
+            tabControl.Size = new Size(638, 481);
+            tabControl.TabIndex = 14;
             // 
             // PanelPrincipal
             // 
@@ -138,7 +192,7 @@
             PanelPrincipal.Location = new Point(4, 24);
             PanelPrincipal.Name = "PanelPrincipal";
             PanelPrincipal.Padding = new Padding(3);
-            PanelPrincipal.Size = new Size(624, 411);
+            PanelPrincipal.Size = new Size(630, 453);
             PanelPrincipal.TabIndex = 0;
             PanelPrincipal.Text = "INICIO";
             PanelPrincipal.Click += tabPage1_Click;
@@ -418,12 +472,25 @@
             // panel6
             // 
             panel6.BackColor = Color.FromArgb(40, 40, 40);
+            panel6.Controls.Add(lbUltimoRegado);
             panel6.Controls.Add(pictureBox4);
             panel6.Controls.Add(label16);
             panel6.Location = new Point(482, 3);
             panel6.Name = "panel6";
             panel6.Size = new Size(200, 100);
             panel6.TabIndex = 1;
+            // 
+            // lbUltimoRegado
+            // 
+            lbUltimoRegado.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lbUltimoRegado.ForeColor = Color.MintCream;
+            lbUltimoRegado.Location = new Point(0, 70);
+            lbUltimoRegado.Name = "lbUltimoRegado";
+            lbUltimoRegado.Size = new Size(197, 28);
+            lbUltimoRegado.TabIndex = 31;
+            lbUltimoRegado.Text = "FECHA";
+            lbUltimoRegado.TextAlign = ContentAlignment.MiddleCenter;
+            lbUltimoRegado.Click += label15_Click;
             // 
             // pictureBox4
             // 
@@ -492,21 +559,93 @@
             // 
             // tabPage2
             // 
+            tabPage2.Controls.Add(lbFechaActual);
+            tabPage2.Controls.Add(label19);
+            tabPage2.Controls.Add(button8);
+            tabPage2.Controls.Add(BuscarHistorial);
+            tabPage2.Controls.Add(dtpFechaBusqueda);
+            tabPage2.Controls.Add(label15);
             tabPage2.Controls.Add(grilla);
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(624, 411);
+            tabPage2.Size = new Size(630, 453);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "HISTORIALES";
             tabPage2.UseVisualStyleBackColor = true;
+            tabPage2.Click += tabPage2_Click;
+            // 
+            // lbFechaActual
+            // 
+            lbFechaActual.AutoSize = true;
+            lbFechaActual.Font = new Font("Segoe UI Black", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            lbFechaActual.Location = new Point(54, 380);
+            lbFechaActual.Name = "lbFechaActual";
+            lbFechaActual.Size = new Size(121, 20);
+            lbFechaActual.TabIndex = 6;
+            lbFechaActual.Text = "FECHA ACTUAL";
+            lbFechaActual.Click += lbFechaActual_Click;
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.BorderStyle = BorderStyle.Fixed3D;
+            label19.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label19.Location = new Point(119, 19);
+            label19.Name = "label19";
+            label19.Size = new Size(367, 27);
+            label19.TabIndex = 5;
+            label19.Text = "HISTORIAL DE RIEGOS EN LAS PLANTAS";
+            // 
+            // button8
+            // 
+            button8.BackColor = Color.FromArgb(128, 128, 255);
+            button8.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button8.ForeColor = SystemColors.Control;
+            button8.Location = new Point(439, 329);
+            button8.Name = "button8";
+            button8.Size = new Size(124, 33);
+            button8.TabIndex = 4;
+            button8.Text = "LIMPIAR";
+            button8.UseVisualStyleBackColor = false;
+            button8.Click += button8_Click;
+            // 
+            // BuscarHistorial
+            // 
+            BuscarHistorial.BackColor = Color.FromArgb(0, 64, 50);
+            BuscarHistorial.Font = new Font("Segoe UI Black", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            BuscarHistorial.ForeColor = SystemColors.Control;
+            BuscarHistorial.Location = new Point(439, 290);
+            BuscarHistorial.Name = "BuscarHistorial";
+            BuscarHistorial.Size = new Size(124, 33);
+            BuscarHistorial.TabIndex = 3;
+            BuscarHistorial.Text = "BUSCAR..";
+            BuscarHistorial.UseVisualStyleBackColor = false;
+            BuscarHistorial.Click += btnBuscarHistorial_Click;
+            // 
+            // dtpFechaBusqueda
+            // 
+            dtpFechaBusqueda.Location = new Point(204, 310);
+            dtpFechaBusqueda.Name = "dtpFechaBusqueda";
+            dtpFechaBusqueda.Size = new Size(200, 23);
+            dtpFechaBusqueda.TabIndex = 2;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Font = new Font("Segoe UI Black", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point, 0);
+            label15.Location = new Point(31, 313);
+            label15.Name = "label15";
+            label15.Size = new Size(155, 20);
+            label15.TabIndex = 1;
+            label15.Text = "BUSCAR HISTORIAL";
             // 
             // grilla
             // 
             grilla.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            grilla.Location = new Point(21, 25);
+            grilla.Location = new Point(54, 60);
             grilla.Name = "grilla";
-            grilla.Size = new Size(232, 349);
+            grilla.Size = new Size(490, 213);
             grilla.TabIndex = 0;
             grilla.CellContentClick += grilla_CellContentClick;
             // 
@@ -516,14 +655,15 @@
             tabPage3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             tabPage3.Location = new Point(4, 24);
             tabPage3.Name = "tabPage3";
-            tabPage3.Size = new Size(624, 411);
+            tabPage3.Size = new Size(630, 453);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "RIEGO MANUAL";
             tabPage3.UseVisualStyleBackColor = true;
+            tabPage3.Click += tabPage3_Click;
             // 
             // btnRiegoAuto
             // 
-            btnRiegoAuto.BackColor = Color.DarkSlateGray;
+            btnRiegoAuto.BackColor = Color.FromArgb(0, 64, 50);
             btnRiegoAuto.ForeColor = SystemColors.ControlLight;
             btnRiegoAuto.Location = new Point(230, 298);
             btnRiegoAuto.Name = "btnRiegoAuto";
@@ -539,7 +679,7 @@
             tabPage4.Controls.Add(panel2);
             tabPage4.Location = new Point(4, 24);
             tabPage4.Name = "tabPage4";
-            tabPage4.Size = new Size(624, 411);
+            tabPage4.Size = new Size(630, 453);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "MIS PLANTAS";
             // 
@@ -755,22 +895,398 @@
             // 
             tabPage5.Location = new Point(4, 24);
             tabPage5.Name = "tabPage5";
-            tabPage5.Size = new Size(624, 411);
+            tabPage5.Size = new Size(630, 453);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "CONFIGURACION";
             tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Controls.Add(cbRol);
+            tabPage1.Controls.Add(btnGuardarCambios);
+            tabPage1.Controls.Add(btnHacerCambios);
+            tabPage1.Controls.Add(button10);
+            tabPage1.Controls.Add(label24);
+            tabPage1.Controls.Add(label25);
+            tabPage1.Controls.Add(txtNombreUsuario);
+            tabPage1.Controls.Add(label23);
+            tabPage1.Controls.Add(txtEmailUsu);
+            tabPage1.Controls.Add(label21);
+            tabPage1.Controls.Add(txtNombreUsuariodelUsuario);
+            tabPage1.Controls.Add(label20);
+            tabPage1.Controls.Add(txtIdUsuario);
+            tabPage1.Controls.Add(pbImagenUsuario);
+            tabPage1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            tabPage1.Location = new Point(4, 24);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(630, 453);
+            tabPage1.TabIndex = 5;
+            tabPage1.Text = "USUARIO";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // cbRol
+            // 
+            cbRol.FormattingEnabled = true;
+            cbRol.Items.AddRange(new object[] { "Cuidador", "Espectador", "Dueño" });
+            cbRol.Location = new Point(243, 261);
+            cbRol.Name = "cbRol";
+            cbRol.Size = new Size(191, 25);
+            cbRol.TabIndex = 16;
+            // 
+            // btnGuardarCambios
+            // 
+            btnGuardarCambios.BackColor = Color.FromArgb(0, 64, 50);
+            btnGuardarCambios.ForeColor = SystemColors.ButtonHighlight;
+            btnGuardarCambios.Location = new Point(487, 23);
+            btnGuardarCambios.Name = "btnGuardarCambios";
+            btnGuardarCambios.Size = new Size(125, 55);
+            btnGuardarCambios.TabIndex = 15;
+            btnGuardarCambios.Text = "GUARDAR CAMBIOS";
+            btnGuardarCambios.UseVisualStyleBackColor = false;
+            btnGuardarCambios.Click += btnGuardarCambios_Click;
+            // 
+            // btnHacerCambios
+            // 
+            btnHacerCambios.BackColor = Color.FromArgb(192, 255, 255);
+            btnHacerCambios.Location = new Point(487, 86);
+            btnHacerCambios.Name = "btnHacerCambios";
+            btnHacerCambios.Size = new Size(125, 31);
+            btnHacerCambios.TabIndex = 14;
+            btnHacerCambios.Text = "HACER CAMBIOS";
+            btnHacerCambios.UseVisualStyleBackColor = false;
+            btnHacerCambios.Click += button11_Click;
+            // 
+            // button10
+            // 
+            button10.BackColor = Color.NavajoWhite;
+            button10.Location = new Point(69, 203);
+            button10.Name = "button10";
+            button10.Size = new Size(103, 31);
+            button10.TabIndex = 13;
+            button10.Text = "Subir Foto";
+            button10.UseVisualStyleBackColor = false;
+            button10.Click += button10_Click;
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Location = new Point(243, 234);
+            label24.Name = "label24";
+            label24.Size = new Size(28, 17);
+            label24.TabIndex = 12;
+            label24.Text = "Rol";
+            // 
+            // label25
+            // 
+            label25.AutoSize = true;
+            label25.Location = new Point(243, 164);
+            label25.Name = "label25";
+            label25.Size = new Size(58, 17);
+            label25.TabIndex = 10;
+            label25.Text = "Nombre";
+            // 
+            // txtNombreUsuario
+            // 
+            txtNombreUsuario.Location = new Point(243, 189);
+            txtNombreUsuario.Name = "txtNombreUsuario";
+            txtNombreUsuario.Size = new Size(191, 25);
+            txtNombreUsuario.TabIndex = 9;
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Location = new Point(27, 237);
+            label23.Name = "label23";
+            label23.Size = new Size(46, 17);
+            label23.TabIndex = 6;
+            label23.Text = "Email ";
+            // 
+            // txtEmailUsu
+            // 
+            txtEmailUsu.Location = new Point(27, 262);
+            txtEmailUsu.Name = "txtEmailUsu";
+            txtEmailUsu.Size = new Size(191, 25);
+            txtEmailUsu.TabIndex = 5;
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Location = new Point(243, 86);
+            label21.Name = "label21";
+            label21.Size = new Size(128, 17);
+            label21.TabIndex = 4;
+            label21.Text = "Nombre de Usuario";
+            label21.Click += label21_Click;
+            // 
+            // txtNombreUsuariodelUsuario
+            // 
+            txtNombreUsuariodelUsuario.Location = new Point(243, 111);
+            txtNombreUsuariodelUsuario.Name = "txtNombreUsuariodelUsuario";
+            txtNombreUsuariodelUsuario.Size = new Size(191, 25);
+            txtNombreUsuariodelUsuario.TabIndex = 3;
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Location = new Point(243, 16);
+            label20.Name = "label20";
+            label20.Size = new Size(96, 17);
+            label20.TabIndex = 2;
+            label20.Text = "Identificación ";
+            // 
+            // txtIdUsuario
+            // 
+            txtIdUsuario.Location = new Point(243, 41);
+            txtIdUsuario.Name = "txtIdUsuario";
+            txtIdUsuario.Size = new Size(191, 25);
+            txtIdUsuario.TabIndex = 1;
+            txtIdUsuario.TextChanged += textBox1_TextChanged;
+            // 
+            // pbImagenUsuario
+            // 
+            pbImagenUsuario.BorderStyle = BorderStyle.Fixed3D;
+            pbImagenUsuario.Image = (Image)resources.GetObject("pbImagenUsuario.Image");
+            pbImagenUsuario.Location = new Point(27, 16);
+            pbImagenUsuario.Name = "pbImagenUsuario";
+            pbImagenUsuario.Size = new Size(189, 184);
+            pbImagenUsuario.SizeMode = PictureBoxSizeMode.Zoom;
+            pbImagenUsuario.TabIndex = 0;
+            pbImagenUsuario.TabStop = false;
+            // 
+            // panel7
+            // 
+            panel7.BackColor = Color.White;
+            panel7.Controls.Add(nightControlBox1);
+            panel7.Controls.Add(btnHam);
+            panel7.Dock = DockStyle.Top;
+            panel7.Location = new Point(0, 0);
+            panel7.Name = "panel7";
+            panel7.Size = new Size(883, 48);
+            panel7.TabIndex = 15;
+            // 
+            // nightControlBox1
+            // 
+            nightControlBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            nightControlBox1.BackColor = Color.Transparent;
+            nightControlBox1.CloseHoverColor = Color.FromArgb(199, 80, 80);
+            nightControlBox1.CloseHoverForeColor = Color.White;
+            nightControlBox1.DefaultLocation = true;
+            nightControlBox1.DisableMaximizeColor = Color.FromArgb(105, 105, 105);
+            nightControlBox1.DisableMinimizeColor = Color.FromArgb(105, 105, 105);
+            nightControlBox1.EnableCloseColor = Color.FromArgb(160, 160, 160);
+            nightControlBox1.EnableMaximizeButton = true;
+            nightControlBox1.EnableMaximizeColor = Color.FromArgb(160, 160, 160);
+            nightControlBox1.EnableMinimizeButton = true;
+            nightControlBox1.EnableMinimizeColor = Color.FromArgb(160, 160, 160);
+            nightControlBox1.Location = new Point(744, 0);
+            nightControlBox1.MaximizeHoverColor = Color.FromArgb(15, 255, 255, 255);
+            nightControlBox1.MaximizeHoverForeColor = Color.White;
+            nightControlBox1.MinimizeHoverColor = Color.FromArgb(15, 255, 255, 255);
+            nightControlBox1.MinimizeHoverForeColor = Color.White;
+            nightControlBox1.Name = "nightControlBox1";
+            nightControlBox1.Size = new Size(139, 31);
+            nightControlBox1.TabIndex = 1;
+            // 
+            // btnHam
+            // 
+            btnHam.Image = (Image)resources.GetObject("btnHam.Image");
+            btnHam.Location = new Point(13, 8);
+            btnHam.Name = "btnHam";
+            btnHam.Size = new Size(38, 33);
+            btnHam.SizeMode = PictureBoxSizeMode.StretchImage;
+            btnHam.TabIndex = 0;
+            btnHam.TabStop = false;
+            btnHam.Click += pictureBox2_Click;
+            // 
+            // flowLayoutPanel1
+            // 
+            flowLayoutPanel1.BackColor = Color.FromArgb(0, 64, 50);
+            flowLayoutPanel1.Controls.Add(panel10);
+            flowLayoutPanel1.Controls.Add(panel9);
+            flowLayoutPanel1.Controls.Add(panel13);
+            flowLayoutPanel1.Controls.Add(panel11);
+            flowLayoutPanel1.Controls.Add(panel8);
+            flowLayoutPanel1.Controls.Add(panel12);
+            flowLayoutPanel1.Dock = DockStyle.Left;
+            flowLayoutPanel1.Location = new Point(0, 48);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(216, 481);
+            flowLayoutPanel1.TabIndex = 16;
+            // 
+            // panel10
+            // 
+            panel10.Controls.Add(button5);
+            panel10.Location = new Point(3, 3);
+            panel10.Name = "panel10";
+            panel10.Size = new Size(213, 54);
+            panel10.TabIndex = 3;
+            // 
+            // button5
+            // 
+            button5.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button5.ForeColor = SystemColors.ControlLightLight;
+            button5.Image = (Image)resources.GetObject("button5.Image");
+            button5.ImageAlign = ContentAlignment.MiddleLeft;
+            button5.Location = new Point(-4, -14);
+            button5.Name = "button5";
+            button5.Padding = new Padding(25, 0, 0, 0);
+            button5.Size = new Size(223, 81);
+            button5.TabIndex = 0;
+            button5.Text = "                INICIO";
+            button5.TextAlign = ContentAlignment.MiddleLeft;
+            button5.UseVisualStyleBackColor = false;
+            button5.Click += button5_Click;
+            // 
+            // panel9
+            // 
+            panel9.Controls.Add(btnHistorial);
+            panel9.Location = new Point(3, 63);
+            panel9.Name = "panel9";
+            panel9.Size = new Size(213, 54);
+            panel9.TabIndex = 3;
+            // 
+            // btnHistorial
+            // 
+            btnHistorial.BackColor = Color.FromArgb(0, 64, 50);
+            btnHistorial.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnHistorial.ForeColor = SystemColors.ControlLightLight;
+            btnHistorial.Image = (Image)resources.GetObject("btnHistorial.Image");
+            btnHistorial.ImageAlign = ContentAlignment.MiddleLeft;
+            btnHistorial.Location = new Point(-4, -14);
+            btnHistorial.Name = "btnHistorial";
+            btnHistorial.Padding = new Padding(25, 0, 0, 0);
+            btnHistorial.Size = new Size(223, 81);
+            btnHistorial.TabIndex = 0;
+            btnHistorial.Text = "                HISTORIAL";
+            btnHistorial.TextAlign = ContentAlignment.MiddleLeft;
+            btnHistorial.UseVisualStyleBackColor = false;
+            btnHistorial.Click += btnHistorial_Click;
+            // 
+            // panel13
+            // 
+            panel13.Controls.Add(button7);
+            panel13.Location = new Point(3, 123);
+            panel13.Name = "panel13";
+            panel13.Size = new Size(213, 54);
+            panel13.TabIndex = 4;
+            // 
+            // button7
+            // 
+            button7.BackColor = Color.FromArgb(0, 64, 50);
+            button7.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button7.ForeColor = SystemColors.ControlLightLight;
+            button7.Image = (Image)resources.GetObject("button7.Image");
+            button7.ImageAlign = ContentAlignment.MiddleLeft;
+            button7.Location = new Point(-4, -14);
+            button7.Name = "button7";
+            button7.Padding = new Padding(25, 0, 0, 0);
+            button7.Size = new Size(223, 81);
+            button7.TabIndex = 0;
+            button7.Text = "                RIEGO MANUAL";
+            button7.TextAlign = ContentAlignment.MiddleLeft;
+            button7.UseVisualStyleBackColor = false;
+            button7.Click += button7_Click;
+            // 
+            // panel11
+            // 
+            panel11.Controls.Add(button6);
+            panel11.Location = new Point(3, 183);
+            panel11.Name = "panel11";
+            panel11.Size = new Size(213, 54);
+            panel11.TabIndex = 3;
+            // 
+            // button6
+            // 
+            button6.BackColor = Color.FromArgb(0, 64, 50);
+            button6.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button6.ForeColor = SystemColors.ControlLightLight;
+            button6.Image = (Image)resources.GetObject("button6.Image");
+            button6.ImageAlign = ContentAlignment.MiddleLeft;
+            button6.Location = new Point(-4, -14);
+            button6.Name = "button6";
+            button6.Padding = new Padding(25, 0, 0, 0);
+            button6.Size = new Size(223, 81);
+            button6.TabIndex = 0;
+            button6.Text = "                MIS PLANTAS";
+            button6.TextAlign = ContentAlignment.MiddleLeft;
+            button6.UseVisualStyleBackColor = false;
+            button6.Click += button6_Click;
+            // 
+            // panel8
+            // 
+            panel8.Controls.Add(button3);
+            panel8.Location = new Point(3, 243);
+            panel8.Name = "panel8";
+            panel8.Size = new Size(213, 54);
+            panel8.TabIndex = 2;
+            // 
+            // button3
+            // 
+            button3.BackColor = Color.FromArgb(0, 64, 50);
+            button3.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button3.ForeColor = SystemColors.ControlLightLight;
+            button3.Image = (Image)resources.GetObject("button3.Image");
+            button3.ImageAlign = ContentAlignment.MiddleLeft;
+            button3.Location = new Point(-4, -14);
+            button3.Name = "button3";
+            button3.Padding = new Padding(25, 0, 0, 0);
+            button3.Size = new Size(223, 81);
+            button3.TabIndex = 0;
+            button3.Text = "                AJUSTES";
+            button3.TextAlign = ContentAlignment.MiddleLeft;
+            button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click_2;
+            // 
+            // panel12
+            // 
+            panel12.Controls.Add(button4);
+            panel12.Location = new Point(3, 303);
+            panel12.Name = "panel12";
+            panel12.Size = new Size(213, 54);
+            panel12.TabIndex = 3;
+            // 
+            // button4
+            // 
+            button4.BackColor = Color.FromArgb(0, 64, 50);
+            button4.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button4.ForeColor = SystemColors.ControlLightLight;
+            button4.Image = (Image)resources.GetObject("button4.Image");
+            button4.ImageAlign = ContentAlignment.MiddleLeft;
+            button4.Location = new Point(-4, -14);
+            button4.Name = "button4";
+            button4.Padding = new Padding(25, 0, 0, 0);
+            button4.Size = new Size(223, 81);
+            button4.TabIndex = 0;
+            button4.Text = "                USUARIO";
+            button4.TextAlign = ContentAlignment.MiddleLeft;
+            button4.UseVisualStyleBackColor = false;
+            button4.Click += button4_Click;
+            // 
+            // MenuTrancicion
+            // 
+            MenuTrancicion.Enabled = true;
+            MenuTrancicion.Interval = 10;
+            MenuTrancicion.Tick += MenuTrancicion_Tick;
+            // 
+            // timer1
+            // 
+            timer1.Tick += timer1_Tick;
             // 
             // MENUPRINCIPAL
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(40, 40, 40);
-            ClientSize = new Size(800, 450);
-            Controls.Add(tabControl1);
+            BackColor = Color.FromArgb(23, 24, 29);
+            ClientSize = new Size(883, 529);
+            Controls.Add(flowLayoutPanel1);
+            Controls.Add(panel7);
+            Controls.Add(tabControl);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "MENUPRINCIPAL";
             Text = "MENUPRINCIPAL";
             Load += MENUPRINCIPAL_Load;
-            tabControl1.ResumeLayout(false);
+            tabControl.ResumeLayout(false);
             PanelPrincipal.ResumeLayout(false);
             panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)ImagenTemperatura).EndInit();
@@ -789,17 +1305,30 @@
             panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             tabPage2.ResumeLayout(false);
+            tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)grilla).EndInit();
             tabPage3.ResumeLayout(false);
             tabPage4.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pbPlanta).EndInit();
+            tabPage1.ResumeLayout(false);
+            tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pbImagenUsuario).EndInit();
+            panel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)btnHam).EndInit();
+            flowLayoutPanel1.ResumeLayout(false);
+            panel10.ResumeLayout(false);
+            panel9.ResumeLayout(false);
+            panel13.ResumeLayout(false);
+            panel11.ResumeLayout(false);
+            panel8.ResumeLayout(false);
+            panel12.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-        private TabControl tabControl1;
+        private TabControl tabControl;
         private TabPage PanelPrincipal;
         private TabPage tabPage2;
         private Label lbDes;
@@ -852,10 +1381,49 @@
         private Label label17;
         private PictureBox pictureBox3;
         private Label label18;
-        private Label label15;
+        private Label lbUltimoRegado;
         private PictureBox pictureBox4;
         private Label label16;
         private Button btnRiegoAuto;
         private DataGridView grilla;
+        private Panel panel7;
+        private PictureBox btnHam;
+        private ReaLTaiizor.Controls.NightControlBox nightControlBox1;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private Panel panel11;
+        private Button button6;
+        private Panel panel10;
+        private Button button5;
+        private Panel panel9;
+        private Button btnHistorial;
+        private Panel panel8;
+        private Button button3;
+        private Panel panel12;
+        private Button button4;
+        private System.Windows.Forms.Timer MenuTrancicion;
+        private Panel panel13;
+        private Button button7;
+        private Label label15;
+        private Button BuscarHistorial;
+        private DateTimePicker dtpFechaBusqueda;
+        private Button button8;
+        private Label label19;
+        private Label lbFechaActual;
+        private System.Windows.Forms.Timer timer1;
+        private TabPage tabPage1;
+        private PictureBox pbImagenUsuario;
+        private Label label20;
+        private TextBox txtIdUsuario;
+        private Label label23;
+        private TextBox txtEmailUsu;
+        private Label label21;
+        private TextBox txtNombreUsuariodelUsuario;
+        private Label label24;
+        private Label label25;
+        private TextBox txtNombreUsuario;
+        private Button btnGuardarCambios;
+        private Button btnHacerCambios;
+        private Button button10;
+        private ComboBox cbRol;
     }
 }

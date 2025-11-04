@@ -9,17 +9,22 @@ namespace PROYECTO_RIEGO_AUTOMATICO
     {
         ServiciosPlanta serviciosPlanta;
         ServicioHistorial servicioHistorial;
+        ServiciosUsuario serviciosUsuario;
         private float humedad_actual, temperatura_actual;
         private bool puedeRegar = true;
+        private int IdDelUsuario;
 
         public MENUPRINCIPAL()
         {
             serviciosPlanta = new ServiciosPlanta();
             servicioHistorial = new ServicioHistorial();
+            serviciosUsuario = new ServiciosUsuario();
             InitializeComponent();
             _ = ObtenerDatosClimaAsync();
             this.StartPosition = FormStartPosition.CenterScreen;
             cargarPlantas();
+
+
 
         }
         public async Task ObtenerDatosClimaAsync()
@@ -50,6 +55,7 @@ namespace PROYECTO_RIEGO_AUTOMATICO
 
             }
         }
+
         public void cargarPlantas()
         {
             var lista = serviciosPlanta.MostrarTodos();
@@ -85,6 +91,176 @@ namespace PROYECTO_RIEGO_AUTOMATICO
                 MessageBox.Show("Seleccione una planta primero.");
             }
         }
+        private void ultimoRegado()
+        {
+            var lista = servicioHistorial.MostrarTodos();
+            Historial_Riego ultimo = null;
+
+            foreach (var item in lista)
+            {
+                ultimo = item;
+            }
+
+            if (ultimo != null)
+            {
+                lbUltimoRegado.Text = ultimo.Fecha.ToString("dd/MM/yyyy HH:mm:ss");
+            }
+            else
+            {
+                lbUltimoRegado.Text = "Sin registros";
+
+            }
+
+        }
+        private void HacerCambios()
+        {
+            txtIdUsuario.Enabled = true;
+            txtNombreUsuario.Enabled = true;
+            txtNombreUsuariodelUsuario.Enabled = true;
+            txtEmailUsu.Enabled = true;
+            cbRol.Enabled = true;
+
+        }
+        private void GuardarCambios()
+        {
+            DialogResult resultado = MessageBox.Show($"¿Seguro que quiere hacer estos cambios?",
+            "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+                var usu = serviciosUsuario.ObtenerPorId(IdDelUsuario);
+                if (int.Parse(txtIdUsuario.Text) != usu.IdUsuario && serviciosUsuario.ExisteId(int.Parse(txtIdUsuario.Text)))
+                {
+                    MessageBox.Show("El ID ingresado ya pertenece a otro usuario. Cámbialo por favor.");
+                    return;
+                }
+
+                // Validar que no exista otro usuario con el mismo nombre de usuario
+                if (txtNombreUsuariodelUsuario.Text != usu.NombreUsuario && serviciosUsuario.ExisteNombreUsuario(txtNombreUsuariodelUsuario.Text))
+                {
+                    MessageBox.Show("El nombre de usuario ya está en uso. Cámbialo por favor.");
+                    return;
+                }
+
+
+
+                usu.IdUsuario = int.Parse(txtIdUsuario.Text);
+                usu.NombreUsuario = txtNombreUsuariodelUsuario.Text;
+                usu.Nombre = txtNombreUsuario.Text;
+                usu.Email = txtEmailUsu.Text;
+                usu.Rol = cbRol.GetItemText(cbRol.SelectedItem);
+
+
+                if (serviciosUsuario.Actualizar(usu))
+                {
+                    MessageBox.Show($"El/La Usuari@ {usu.NombreUsuario} fue actualizad@ correctamente");
+
+                }
+                else
+                {
+                    MessageBox.Show("Hubo un error al guardar los cambios: ");
+                }
+                CargarUsuario();
+            }
+            return;
+        }
+        private void CargarUsuario()
+        {
+            Usuario usuario = new Usuario();
+            var list = serviciosUsuario.MostrarTodos();
+            foreach (var item in list)
+            {
+                if (item.Accedio == 1)
+                {
+                    IdDelUsuario = item.IdUsuario;
+                    serviciosUsuario.Actualizar(item);
+                    break;
+                }
+            }
+
+            usuario = serviciosUsuario.ObtenerPorId(IdDelUsuario);
+            txtIdUsuario.Text = usuario.IdUsuario.ToString();
+            txtNombreUsuario.Text = usuario.Nombre;
+            txtNombreUsuariodelUsuario.Text = usuario.NombreUsuario;
+            cbRol.Text = usuario.Rol;
+            txtEmailUsu.Text = usuario.Email;
+            if (!string.IsNullOrEmpty(usuario.RutaImagen) && File.Exists(usuario.RutaImagen))
+            {
+                pbImagenUsuario.Image = Image.FromFile(usuario.RutaImagen);
+            }
+            txtIdUsuario.Enabled = false;
+            txtNombreUsuario.Enabled = false;
+            txtNombreUsuariodelUsuario.Enabled = false;
+            txtEmailUsu.Enabled = false;
+            cbRol.Enabled = false;
+
+
+        }
+        private void ActualizarEstadoConexion()
+        {
+            if (Application.OpenForms["MENUPRINCIPAL"] != null)
+            {
+                label14.Text = "ACTIVO";
+                label14.BackColor = ColorTranslator.FromHtml("#21864B"); // Verde
+            }
+            else
+            {
+                label14.Text = "DESCONECTADO";
+                label14.BackColor = ColorTranslator.FromHtml("#8B0000"); // Rojo oscuro
+            }
+        }
+        private void ActivarRiego()
+        {
+            try
+            {
+                DialogResult resultado = MessageBox.Show($"¿Seguro que quiere iniciar el riego?",
+                    "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (resultado == DialogResult.Yes)
+                {
+
+                    var lis = servicioHistorial.MostrarTodos();
+                    Historial_Riego historial = new Historial_Riego();
+                    historial.Id = lis.Count() + 1;
+                    historial.Temperatura = temperatura_actual;
+                    historial.Humedad = humedad_actual;
+                    historial.Fecha = DateTime.Now;
+                    servicioHistorial.Guardar(historial);
+                }
+                else
+                {
+                    return;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrio un error..." + ex);
+            }
+
+
+        }
+        private async Task CicloRiegoAsync()
+        {
+            if (puedeRegar)
+            {
+                puedeRegar = false;
+                btnRiegoAuto.Enabled = false;
+
+                ActivarRiego(); // Ejecuta el riego
+
+                await Task.Delay(TimeSpan.FromSeconds(10));
+
+                puedeRegar = true;
+                btnRiegoAuto.Enabled = true;
+                MessageBox.Show("Ya puedes volver a regar.");
+            }
+            else
+            {
+                MessageBox.Show("Debes esperar antes de volver a regar.");
+            }
+        }
+
 
         private void label2_Click(object sender, EventArgs e)
         {
@@ -94,6 +270,12 @@ namespace PROYECTO_RIEGO_AUTOMATICO
         private void MENUPRINCIPAL_Load(object sender, EventArgs e)
         {
             ActualizarEstadoConexion();
+            ultimoRegado();
+            CargarHistorial();
+            timer1.Start();
+            timer1.Enabled = true;
+            timer1.Interval = 1000;
+            CargarUsuario();
 
         }
 
@@ -192,19 +374,6 @@ namespace PROYECTO_RIEGO_AUTOMATICO
         {
 
         }
-        private void ActualizarEstadoConexion()
-        {
-            if (Application.OpenForms["MENUPRINCIPAL"] != null)
-            {
-                label14.Text = "ACTIVO";
-                label14.BackColor = ColorTranslator.FromHtml("#21864B"); // Verde
-            }
-            else
-            {
-                label14.Text = "DESCONECTADO";
-                label14.BackColor = ColorTranslator.FromHtml("#8B0000"); // Rojo oscuro
-            }
-        }
 
         private void label17_Click(object sender, EventArgs e)
         {
@@ -214,85 +383,175 @@ namespace PROYECTO_RIEGO_AUTOMATICO
         private void button3_Click(object sender, EventArgs e)
         {
             CicloRiegoAsync();
+            ultimoRegado();
+        }
+        private void grilla_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            servicioHistorial.MostrarTodos();
+        }
+        private bool CargarHistorial()
+        {
+            grilla.DataSource = servicioHistorial.MostrarTodos();
+            return true;
+        }
+        private void button3_Click_1(object sender, EventArgs e)
+        {
 
         }
-        private async Task CicloRiegoAsync()
+
+        private void panel8_Paint(object sender, PaintEventArgs e)
         {
-            if (puedeRegar)
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            MenuTrancicion.Start();
+        }
+
+        bool Expandir = false;
+        private void MenuTrancicion_Tick(object sender, EventArgs e)
+        {
+            if (Expandir)
             {
-                puedeRegar = false;
-                btnRiegoAuto.Enabled = false;
+                flowLayoutPanel1.Width -= 10;
+                if (flowLayoutPanel1.Width <= 70)
+                {
+                    Expandir = false;
+                    MenuTrancicion.Stop();
+                }
 
-                ActivarRiego(); // Ejecuta el riego
-
-                await Task.Delay(TimeSpan.FromSeconds(10));
-
-                puedeRegar = true;
-                btnRiegoAuto.Enabled = true;
-                MessageBox.Show("Ya puedes volver a regar.");
             }
             else
             {
-                MessageBox.Show("Debes esperar antes de volver a regar.");
-            }
-        }
-
-
-        private void ActivarRiego()
-        {
-            try
-            {
-                    DialogResult resultado = MessageBox.Show($"¿Seguro que quiere iniciar el riego?",
-                        "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (resultado == DialogResult.Yes)
+                flowLayoutPanel1.Width += 10;
+                if (flowLayoutPanel1.Width >= 216)
                 {
-
-                    var lis = servicioHistorial.MostrarTodos();
-                    Historial_Riego historial = new Historial_Riego();
-                    historial.Id = lis.Count() + 1;
-                    historial.Temperatura = temperatura_actual;
-                    historial.Humedad = humedad_actual;
-                    historial.Fecha = DateTime.Now;
-                    servicioHistorial.Guardar(historial);
+                    Expandir = true;
+                    MenuTrancicion.Stop();
                 }
-                else
-                {
-                    return;
-                }
-
-            }catch(Exception ex)
-            {
-                MessageBox.Show("Ocurrio un error..." + ex);
             }
-            
-            
         }
 
-        private void grilla_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
-            CargarHistorialEnGrid();
+            tabControl.SelectedIndex = 0;
         }
-        private void CargarHistorialEnGrid()
+        private void btnHistorial_Click(object sender, EventArgs e)
         {
-            var lista = servicioHistorial.MostrarTodos(); // Devuelve la lista desde el archivo
+            tabControl.SelectedIndex = 1;
+        }
 
-            // Crear una tabla temporal
-            DataTable tabla = new DataTable();
-            tabla.Columns.Add("Id", typeof(int));
-            tabla.Columns.Add("Fecha", typeof(DateTime));
-            tabla.Columns.Add("Humedad", typeof(float));
-            tabla.Columns.Add("Temperatura", typeof(float));
+        private void button7_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedIndex = 2;
+        }
 
-            foreach (var item in lista)
+        private void button6_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedIndex = 3;
+        }
+
+        private void button3_Click_2(object sender, EventArgs e)
+        {
+            tabControl.SelectedIndex = 4;
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnBuscarHistorial_Click(object sender, EventArgs e)
+        {
+            BuscarHistorialGrilla();
+        }
+
+        private void BuscarHistorialGrilla()
+        {
+            DateTime fechaSeleccionada = dtpFechaBusqueda.Value.Date;
+
+            var lista = servicioHistorial.MostrarTodos();
+
+            var resultados = lista.Where(x => x.Fecha.Date == fechaSeleccionada).ToList();
+
+            if (resultados.Any())
             {
-                tabla.Rows.Add(item.Id, item.Fecha, item.Humedad, item.Temperatura);
+                grilla.DataSource = null; // limpiar primero
+                grilla.DataSource = resultados;
             }
-
-            grilla.DataSource = tabla;
-            grilla.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            grilla.ReadOnly = true;
+            else
+            {
+                MessageBox.Show("No se encontraron registros para esa fecha.", "Sin resultados", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
+        private void button8_Click(object sender, EventArgs e)
+        {
+            CargarHistorial();
+            dtpFechaBusqueda.ResetText();
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbFechaActual_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lbFechaActual.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedIndex = 5;
+        }
+        private void label21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialogo = new OpenFileDialog();
+            var usu = serviciosUsuario.ObtenerPorId(IdDelUsuario);
+            dialogo.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png;*.bmp";
+
+            if (dialogo.ShowDialog() == DialogResult.OK)
+            {
+                usu.RutaImagen = dialogo.FileName;
+                serviciosUsuario.Actualizar(usu);
+                pbImagenUsuario.Image = Image.FromFile(usu.RutaImagen);
+            }
+            else
+            {
+                MessageBox.Show("No se seleccionó ninguna imagen.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            HacerCambios();
+        }
+
+        private void btnGuardarCambios_Click(object sender, EventArgs e)
+        {
+            GuardarCambios();
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -2,6 +2,7 @@
 using ENTITY;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 
 namespace BLL
@@ -41,17 +42,16 @@ namespace BLL
             return usuarioRepository.ObtenerPorId(id);
         }
 
-        public bool ExisteUsuario(string usuario)
+        public bool ExisteId(int id)
         {
-            foreach(var lista in MostrarTodos())
-            {
-                if (lista.NombreUsuario == usuario)
-                {
-                    return false;
-                }
-            }
-            return true;
+            return MostrarTodos().Any(u => u.IdUsuario == id);
         }
+
+        public bool ExisteNombreUsuario(string nombreUsuario)
+        {
+            return MostrarTodos().Any(u => u.NombreUsuario.Equals(nombreUsuario, StringComparison.OrdinalIgnoreCase));
+        }
+
     }
 }
 

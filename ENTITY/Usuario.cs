@@ -10,10 +10,12 @@ namespace ENTITY
         public string NombreUsuario { get; set; }
         public string Password { get; set; }
         public string Rol { get; set; }
+        public string RutaImagen { get; set; }
+        public int Accedio { get; set; }
 
         public override string ToString()
         {
-            return $"{IdUsuario};{Nombre};{Email};{NombreUsuario};{Password};{Rol}";
+            return $"{IdUsuario};{Nombre};{Email};{NombreUsuario};{Password};{Rol};{RutaImagen};{Accedio}";
         }
     }
 }

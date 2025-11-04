@@ -20,42 +20,54 @@ namespace DAL
         {
             var lista = MostrarTodos();
             bool actualizado = false;
-            Usuario UsuarioActualizado = null;
 
-            foreach (var item in lista)
+            // 🔹 Buscar el usuario por Id y actualizar sus datos
+            for (int i = 0; i < lista.Count; i++)
             {
-                if (item.IdUsuario == obj.IdUsuario)
+                if (lista[i].IdUsuario == obj.IdUsuario)
                 {
-                    UsuarioActualizado = item;
-                    item.Nombre = obj.Nombre;
-                    item.Email = obj.Email;
-                    item.NombreUsuario = obj.NombreUsuario;
-                    item.Password = obj.Password;
-                    item.Rol = obj.Rol;
+                    lista[i].Nombre = obj.Nombre;
+                    lista[i].Email = obj.Email;
+                    lista[i].NombreUsuario = obj.NombreUsuario;
+                    lista[i].Password = obj.Password;
+                    lista[i].Rol = obj.Rol;
+                    lista[i].RutaImagen = obj.RutaImagen;
+                    lista[i].Accedio = obj.Accedio;
                     actualizado = true;
                     break;
                 }
             }
+
             if (actualizado)
             {
                 try
                 {
-                    MostrarTodos();
-                    Console.WriteLine($"El Usuario {UsuarioActualizado.Nombre} fue actualizado correctamente");
+                    // 🔹 Paso 1: limpiar el archivo antes de volver a escribir
+                    File.WriteAllText(ruta, string.Empty);
+
+                    // 🔹 Paso 2: volver a guardar todos los usuarios actualizados
+                    foreach (var usuario in lista)
+                    {
+                        Guardar(usuario);
+                    }
+
+                    Console.WriteLine($"El usuario {obj.Nombre} fue actualizado correctamente.");
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    Console.WriteLine("Hubo un error...");
+                    Console.WriteLine($"Error al actualizar usuario: {ex.Message}");
                     return false;
                 }
             }
             else
             {
-                Console.WriteLine("No se encontro el usuario...");
+                Console.WriteLine("No se encontró el usuario a actualizar.");
                 return false;
             }
         }
+
+
 
         public override Usuario ObtenerPorId(int obj)
         {
@@ -139,7 +151,10 @@ namespace DAL
             usuario.NombreUsuario = linea.Split(';')[3];
             usuario.Password = linea.Split(';')[4];
             usuario.Rol = linea.Split(';')[5];
+            usuario.RutaImagen = linea.Split(';')[6];
+            usuario.Accedio = int.Parse(linea.Split(';')[7]);
             return usuario;
         }
+        
     }
 }

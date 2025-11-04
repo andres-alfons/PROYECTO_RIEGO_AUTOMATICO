@@ -43,7 +43,7 @@ namespace PROYECTO_RIEGO_AUTOMATICO
         }
         private bool ValidarUsuario()
         {
-            if (!serviciosUsuario.ExisteUsuario(txtUusario.Text.Trim()))
+            if (!serviciosUsuario.ExisteNombreUsuario(txtUusario.Text.Trim()))
             {
                 MessageBox.Show("El nombre de usuario ya existe. Por favor, elija otro.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
